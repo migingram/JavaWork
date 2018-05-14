@@ -90,7 +90,7 @@ public class BrickBreaker
         		     aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() - 1);
         	     }
             	 
-            	 if ((aim.getEndY() < 568) && (template.rightPressed()))
+            	 if ((aim.getEndY() < 575) && (template.rightPressed()))
             	 {
         		     aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() + 1);
             	 }
@@ -125,7 +125,7 @@ public class BrickBreaker
         		       aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() - 1);
         	       }
         	           
-        	       if ((aim.getEndY() < 568) && (template.leftPressed()))
+        	       if ((aim.getEndY() < 575) && (template.leftPressed()))
                    {
         	           aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() + 1);
         	       }
@@ -151,12 +151,29 @@ public class BrickBreaker
      		         paddle3.setXPosition(paddle3.getXPosition() - 10);
      	         }
                 
-                 ball.setXPosition(ball.getXPosition() - 5);
-                 ball.setYPosition(ball.getYPosition() - 5);
                  
+                 double eq1 = 0;
+                
+                 if (aim.getStartX() > aim.getEndX())
+                 {
+                	 eq1 = Math.sqrt(aim.getStartX() - aim.getEndX());
+                 }
+                 else if (aim.getStartX() < aim.getEndX())
+                 {
+                	 eq1 =  -Math.sqrt(aim.getEndX() - aim.getStartX());
+                 }
+                 else 
+                 {
+                	 eq1 = 0;
+                 }
                  
-                template.pause();
-                template.update();
+                 double eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
+                
+                 ball.setXPosition(ball.getXPosition() - eq1);
+                 ball.setYPosition(ball.getYPosition() - eq2);
+                 
+                 template.pause();
+                 template.update();
              }       
         }  
     }
