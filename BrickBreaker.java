@@ -10,8 +10,48 @@ public class BrickBreaker
         template.addRectangle(rightColumn);
         template.addRectangle(pointsBar);
         template.update();
+        
+        Rectangle[] b = new Rectangle[25];
+	    
+        int marginX = 0;
+        int marginY = 0;
+      
+        for (int counter1 = 0; counter1 < 25; counter1++)
+        {
+     	    if (counter1 == 5 || counter1 == 10 || counter1 == 15 || counter1 == 20)
+     	    {
+                marginX = 0;
+                marginY = marginY + 40;
+            }
+     	 
+            if ((counter1 >= 0 && counter1 < 5) || (counter1 > 19 && counter1 < 25))
+            {
+     	        b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#b87333");
+                template.addRectangle(b[counter1]);
+     	    }
+     	    else if ((counter1 > 4 && counter1 < 11) || (counter1 > 13 && counter1 < 20))
+     	    {
+     	  	    b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#5a5b5e");
+                template.addRectangle(b[counter1]);
+     	    }
+     	    else if ((counter1 == 11) || (counter1 == 13))
+     	    {
+     		    b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#D4AF37");
+                template.addRectangle(b[counter1]);
+     	    }
+     	    else if ((counter1 == 12))
+     	    {
+     		    b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#dce1ea");
+                template.addRectangle(b[counter1]);
+     	    }
+          
+            marginX = marginX + 90;
+            template.update();
+        }
+
     }
 }
+
 
 
                                                               
