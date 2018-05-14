@@ -11,6 +11,8 @@ public class BrickBreaker
         template.addRectangle(pointsBar);
         template.update();
         
+        Arrow aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
+        
         Rectangle[] b = new Rectangle[25];
 	    
         int marginX = 0;
@@ -48,10 +50,63 @@ public class BrickBreaker
             marginX = marginX + 90;
             template.update();
         }
+        
+        while (true)
+        {   
+             while ((aim.getStartX() <= aim.getEndX()))
+             {
+            	 
+            	 if (template.spacePressed())
+                 {
+            		 aim.setColour("000000");
+
+                     template.update();
+                 }
+            	 
+            	 
+            	 if (template.leftPressed() )
+        	     {
+        		     aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() - 1);
+        	     }
+            	 
+            	 if ((aim.getEndY() < 568) && (template.rightPressed()))
+            	 {
+        		     aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() + 1);
+            	 }
+            
+                   template.pause();
+                   template.update();
+             }
+             
+
+             while ((aim.getStartX() > aim.getEndX()))
+             {     
+            	 
+            	 
+            	 if (template.spacePressed())
+                 {
+         	         aim.setColour("000000");
+         	         
+                     template.update();
+          	              
+                 }
+            	      	 
+            	 
+        	       if (template.rightPressed())
+        	       {
+        		       aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() - 1);
+        	       }
+        	           
+        	       if ((aim.getEndY() < 568) && (template.leftPressed()))
+                   {
+        	           aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() + 1);
+        	       }
+
+                   template.pause();
+                   template.update();
+             }
+             
+        }
 
     }
 }
-
-
-
-                                                              
