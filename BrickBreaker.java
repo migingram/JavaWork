@@ -62,6 +62,11 @@ public class BrickBreaker
 	    Rectangle paddle3 = new Rectangle(418, 585, 14, 20, "FFFFFF");
 	    
 	    Ball ball = new Ball(385, 560, 6, "FFFFFF");
+	    
+	    
+        double eq1 = 0;
+        int direction1 = 1;
+        int direction2 = 1;
 	            
         
 	    while (true)
@@ -139,20 +144,19 @@ public class BrickBreaker
              {
             	 if ((template.rightPressed()) && (paddle1.getXPosition() < 700))
      	         {
-     		         paddle1.setXPosition(paddle1.getXPosition() + 10);
-     		         paddle2.setXPosition(paddle2.getXPosition() + 10);
-     		         paddle3.setXPosition(paddle3.getXPosition() + 10);
+     		         paddle1.setXPosition(paddle1.getXPosition() + 12);
+     		         paddle2.setXPosition(paddle2.getXPosition() + 12);
+     		         paddle3.setXPosition(paddle3.getXPosition() + 12);
      	         }
                 
                 if ((template.leftPressed()) && (paddle1.getXPosition() > 55))
      	         {
-     		         paddle1.setXPosition(paddle1.getXPosition() - 10);
-     		         paddle2.setXPosition(paddle2.getXPosition() - 10);
-     		         paddle3.setXPosition(paddle3.getXPosition() - 10);
+     		         paddle1.setXPosition(paddle1.getXPosition() - 12);
+     		         paddle2.setXPosition(paddle2.getXPosition() - 12);
+     		         paddle3.setXPosition(paddle3.getXPosition() - 12);
      	         }
                 
-                 
-                 double eq1 = 0;
+               
                 
                  if (aim.getStartX() > aim.getEndX())
                  {
@@ -160,7 +164,7 @@ public class BrickBreaker
                  }
                  else if (aim.getStartX() < aim.getEndX())
                  {
-                	 eq1 =  -Math.sqrt(aim.getEndX() - aim.getStartX());
+                	 eq1 =  - (Math.sqrt(aim.getEndX() - aim.getStartX()));
                  }
                  else 
                  {
@@ -168,9 +172,31 @@ public class BrickBreaker
                  }
                  
                  double eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
-                
-                 ball.setXPosition(ball.getXPosition() - eq1);
-                 ball.setYPosition(ball.getYPosition() - eq2);
+                 
+                 if (ball.getXPosition() > 6 && ball.getXPosition() < 750 && ball.getYPosition() > 0)
+                 {
+                     ball.setXPosition(ball.getXPosition() - (eq1 * direction1));
+                     ball.setYPosition(ball.getYPosition() - eq2 * direction2);
+                 }
+                 
+                 if (ball.getXPosition() >= 743)
+                 {
+                	 direction1 = - direction1;
+                 }
+                 
+                 if (ball.getXPosition() <= 10)
+                 {
+                	 direction1 = - direction1;
+                 }
+                 if (ball.getYPosition() <= 10)
+                 {
+                	 direction2 = - direction2;
+                 }
+                 
+                 if ((ball.getYPosition() == paddle1.getYPosition()) && (ball.getXPosition() == paddle1.getXPosition()))
+                 {
+                	 direction2 = - direction2;
+                 }
                  
                  template.pause();
                  template.update();
