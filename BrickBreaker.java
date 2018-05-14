@@ -60,6 +60,8 @@ public class BrickBreaker
         Rectangle paddle1 = new Rectangle(385, 580, 80, 10, "FFFFFF");
 	    Rectangle paddle2 = new Rectangle(352, 585, 14, 20, "FFFFFF");
 	    Rectangle paddle3 = new Rectangle(418, 585, 14, 20, "FFFFFF");
+	    
+	    Ball ball = new Ball(385, 560, 6, "FFFFFF");
 	            
         
 	    while (true)
@@ -74,6 +76,8 @@ public class BrickBreaker
          	         template.addRectangle(paddle1);
                      template.addRectangle(paddle2);
                      template.addRectangle(paddle3);
+                     
+                     template.addBall(ball);
                     
                      template.update();
           	         
@@ -107,6 +111,8 @@ public class BrickBreaker
          	         template.addRectangle(paddle1);
                      template.addRectangle(paddle2);
                      template.addRectangle(paddle3);
+                     
+                     template.addBall(ball);
                     
                      template.update();
           	         
@@ -144,6 +150,9 @@ public class BrickBreaker
      		         paddle2.setXPosition(paddle2.getXPosition() - 10);
      		         paddle3.setXPosition(paddle3.getXPosition() - 10);
      	         }
+                
+                 ball.setXPosition(ball.getXPosition() - 5);
+                 ball.setYPosition(ball.getYPosition() - 5);
                  
                  
                 template.pause();
