@@ -79,11 +79,13 @@ public class BrickBreaker
     	   directionY[valcount] = 1;
        }
        
-       boolean singlebounce = false;
+       boolean[] singlebounce = new boolean[5];
        
-       int margin1 = 0;
-       int margin2 = 0;
-	            
+       for (int assign = 0; assign < 5; assign++)
+       {
+    	   singlebounce[assign] = false;
+       }
+      
         
 	    while (true)
         {   
@@ -306,43 +308,52 @@ public class BrickBreaker
                  }
                  
                  
+                 int margin1 = 0;
+                 int margin2 = 0;
+          	            
                  
-            	 for (int counter = 0; counter < 5; counter++)
+                 for (int brickCount = 0; brickCount < 5; brickCount++)
                  {
-                  
-            	 	 if ( (b[counter].getXPosition() > 158 && b[counter].getXPosition() < 165) && 
-            			  (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
-            			   singlebounce == false)
+                	 for (int counter = 0; counter < 5; counter++)
                      {
-                    	 template.removeRectangle(brick[0]);
-                    	 directionX[counter] = - directionX[counter];
-                    	 singlebounce = true;
+                      
+                	 	 if ( (b[counter].getXPosition() > 158 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
+                			  (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
+                			   singlebounce[brickCount] == false)
+                         {
+                        	 template.removeRectangle(brick[brickCount]);
+                        	 directionX[counter] = - directionX[counter];
+                        	 singlebounce[brickCount] = true;
+                         }
+                		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                			       (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
+                			        singlebounce[brickCount] == false)
+                         {
+                        	 template.removeRectangle(brick[brickCount]);
+                        	 directionX[counter] = - directionX[counter];
+                        	 singlebounce[brickCount] = true;
+                         } 
+                		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                			  (b[counter].getYPosition() > 185 && b[counter].getYPosition() < 192) &&
+                			  singlebounce[brickCount] == false)
+                         {
+                        	 template.removeRectangle(brick[brickCount]);
+                        	 directionY[counter] = - directionY[counter];
+                        	 singlebounce[brickCount] = true;
+                         }	 
+                		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                			  (b[counter].getYPosition() > 215 && b[counter].getYPosition() < 222) &&
+                			  singlebounce[brickCount] == false)
+                         {
+                        	 template.removeRectangle(brick[brickCount]);
+                        	 directionY[counter] = - directionY[counter];
+                        	 singlebounce[brickCount] = true;
+                         } 
                      }
-            		 else if ( (b[counter].getXPosition() > 230 && b[counter].getXPosition() < 240) && 
-            			       (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
-            			        singlebounce == false)
-                     {
-                    	 template.removeRectangle(brick[0]);
-                    	 directionX[counter] = - directionX[counter];
-                    	 singlebounce = true;
-                     } 
-            		 else if ( (b[counter].getXPosition() > 160 && b[counter].getXPosition() < 240) && 
-            			  (b[counter].getYPosition() > 185 && b[counter].getYPosition() < 192) &&
-            			   singlebounce == false)
-                     {
-                    	 template.removeRectangle(brick[0]);
-                    	 directionY[counter] = - directionY[counter];
-                    	 singlebounce = true;
-                     }	 
-            		 else if ( (b[counter].getXPosition() > 160 && b[counter].getXPosition() < 240) && 
-            			  (b[counter].getYPosition() > 215 && b[counter].getYPosition() < 222) &&
-            			   singlebounce == false)
-                     {
-                    	 template.removeRectangle(brick[0]);
-                    	 directionY[counter] = - directionY[counter];
-                    	 singlebounce = true;
-                     } 
+                	 
+                	 margin1 = margin1 + 90;
                  }
+            	 
             	 
             	 
                  template.pause();
