@@ -57,32 +57,32 @@ public class BrickBreaker
         
         boolean change = false;
 	    
-	    Ball b1 = new Ball(385, 560, 6, "FFFFFF");
-	    Ball b2 = new Ball(385, 560, 6, "FFFFFF");
-	    Ball b3 = new Ball(385, 560, 6, "FFFFFF");
-	    Ball b4 = new Ball(385, 560, 6, "FFFFFF");
-	    Ball b5 = new Ball(385, 560, 6, "FFFFFF");
+        Ball[] b = new Ball[5];
+        
+        for (int valcount = 0; valcount < 5; valcount++)
+        {
+        	b[valcount] = new Ball(385, 560, 6, "FFFFFF");
+        }
+	    
 	    
 	    int pause = 0;
 	    
         double eq1 = 0;
         double eq2 = 0;
         
-        int directionX1 = 1;
-        int directionY1 = 1;
+        int[] directionX = new int[5];
+        int[] directionY = new int[5];
         
-        int directionX2 = 1;
-        int directionY2 = 1;
-        
-        int directionX3 = 1;
-        int directionY3 = 1;
-        
-        int directionX4 = 1;
-        int directionY4 = 1;
-        
-        int directionX5 = 1;
-        int directionY5 = 1;
-        
+       for (int valcount = 0; valcount < 5; valcount++)
+       {
+    	   directionX[valcount] = 1;
+    	   directionY[valcount] = 1;
+       }
+       
+       boolean singlebounce = false;
+       
+       int margin1 = 0;
+       int margin2 = 0;
 	            
         
 	    while (true)
@@ -94,11 +94,10 @@ public class BrickBreaker
                  {
             		 aim.setColour("000000");
                      
-                     template.addBall(b1);
-                     template.addBall(b2);
-                     template.addBall(b3);
-                     template.addBall(b4);
-                     template.addBall(b5);
+            		 for (int counter = 0; counter < 5; counter++)
+            		 {
+            			 template.addBall(b[counter]);
+            		 }
                     
                      template.update();
           	         
@@ -129,12 +128,11 @@ public class BrickBreaker
                  {
          	         aim.setColour("000000");
 
-                     template.addBall(b1);
-                     template.addBall(b2);
-                     template.addBall(b3);
-                     template.addBall(b4);
-                     template.addBall(b5);
-                    
+         	        for (int counter = 0; counter < 5; counter++)
+           		    {
+           			     template.addBall(b[counter]);
+           		    } 
+         	        
                      template.update();
           	         
           	         change = true;       
@@ -173,123 +171,180 @@ public class BrickBreaker
                  
                  eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
                  
-                 if (b1.getXPosition() > 6 && b1.getXPosition() < 750 && b1.getYPosition() > 0)
+                 
+                 
+                 
+                 if (b[0].getXPosition() > 6 && b[0].getXPosition() < 750 && b[0].getYPosition() > 0)
                  {
-                     b1.setXPosition(b1.getXPosition() - (eq1 * directionX1));
-                     b1.setYPosition(b1.getYPosition() - eq2 * directionY1);
+                	 b[0].setXPosition(b[0].getXPosition() - (eq1 * directionX[0]));
+                	 b[0].setYPosition(b[0].getYPosition() - eq2 * directionY[0]);
                  }
                  
-                 if (b1.getXPosition() >= 743)
+                 if (b[0].getXPosition() >= 743)
                  {
-                	 directionX1 = - directionX1;
+                	 directionX[0] = - directionX[0];
                  }
                  
-                 if (b1.getXPosition() <= 10)
+                 if (b[0].getXPosition() <= 13)
                  {
-                	 directionX1 = - directionX1;
+                	 directionX[0] = - directionX[0];
                  }
-                 if (b1.getYPosition() <= 10)
+                 if (b[0].getYPosition() <= 12)
                  {
-                	 directionY1 = - directionY1;
+                	 directionY[0] = - directionY[0];
                  }
+                 
+             	   
+                    	 
                  
                  pause = pause + 1;
                  
+                 
+                 
+                 
                  if (pause >= 10)
                  {                 
-                     if (b2.getXPosition() > 6 && b2.getXPosition() < 750 && b2.getYPosition() > 0)
+                     if (b[1].getXPosition() > 6 && b[1].getXPosition() < 750 && b[1].getYPosition() > 0)
                      {
-                    	 b2.setXPosition(b2.getXPosition() - (eq1 * directionX2));
-                    	 b2.setYPosition(b2.getYPosition() - eq2 * directionY2);
+                    	 b[1].setXPosition(b[1].getXPosition() - (eq1 * directionX[1]));
+                    	 b[1].setYPosition(b[1].getYPosition() - eq2 * directionY[1]);
                      }
                      
-                     if (b2.getXPosition() >= 743)
+                     if (b[1].getXPosition() >= 743)
                      {
-                    	 directionX2 = - directionX2;
+                    	 directionX[1] = - directionX[1];
                      }
                      
-                     if (b2.getXPosition() <= 10)
+                     if (b[1].getXPosition() <= 10)
                      {
-                    	 directionX2 = - directionX2;
+                    	 directionX[1] = - directionX[1];
                      }
-                     if (b2.getYPosition() <= 10)
+                     if (b[1].getYPosition() <= 10)
                      {
-                    	 directionY2 = - directionY2;
+                    	 directionY[1] = - directionY[1];
                      }
                  }
+                 
+                 
+                 
                  
                  if (pause >= 20)
                  {                 
-                     if (b3.getXPosition() > 6 && b3.getXPosition() < 750 && b3.getYPosition() > 0)
+                     if (b[2].getXPosition() > 6 && b[2].getXPosition() < 750 && b[2].getYPosition() > 0)
                      {
-                    	 b3.setXPosition(b3.getXPosition() - (eq1 * directionX3));
-                    	 b3.setYPosition(b3.getYPosition() - eq2 * directionY3);
+                    	 b[2].setXPosition(b[2].getXPosition() - (eq1 * directionX[2]));
+                    	 b[2].setYPosition(b[2].getYPosition() - eq2 * directionY[2]);
                      }
                      
-                     if (b3.getXPosition() >= 743)
+                     if (b[2].getXPosition() >= 743)
                      {
-                    	 directionX3 = - directionX3;
+                    	 directionX[2] = - directionX[2];
                      }
                      
-                     if (b3.getXPosition() <= 10)
+                     if (b[2].getXPosition() <= 10)
                      {
-                    	 directionX3 = - directionX3;
+                    	 directionX[2] = - directionX[2];
                      }
-                     if (b3.getYPosition() <= 10)
+                     if (b[2].getYPosition() <= 10)
                      {
-                    	 directionY3 = - directionY3;
-                     }
+                    	 directionY[2] = - directionY[2];
+                     }  
                  }
+                 
+                 
+                 
                  
                  if (pause >= 30)
                  {                 
-                     if (b4.getXPosition() > 6 && b4.getXPosition() < 750 && b4.getYPosition() > 0)
+                     if (b[3].getXPosition() > 6 && b[3].getXPosition() < 750 && b[3].getYPosition() > 0)
                      {
-                    	 b4.setXPosition(b4.getXPosition() - (eq1 * directionX4));
-                    	 b4.setYPosition(b4.getYPosition() - eq2 * directionY4);
+                    	 b[3].setXPosition(b[3].getXPosition() - (eq1 * directionX[3]));
+                    	 b[3].setYPosition(b[3].getYPosition() - eq2 * directionY[3]);
                      }
                      
-                     if (b4.getXPosition() >= 743)
+                     if (b[3].getXPosition() >= 743)
                      {
-                    	 directionX4 = - directionX4;
+                    	 directionX[3] = - directionX[3];
                      }
                      
-                     if (b4.getXPosition() <= 10)
+                     if (b[3].getXPosition() <= 10)
                      {
-                    	 directionX4 = - directionX4;
+                    	 directionX[3] = - directionX[3];
                      }
                      
-                     if (b4.getYPosition() <= 10)
+                     if (b[3].getYPosition() <= 10)
                      {
-                    	 directionY4 = - directionY4;
+                    	 directionY[3] = - directionY[3];
                      }
                  }
+                 
+                 
+                 
                  
                  if (pause >= 40)
                  {                 
-                     if (b5.getXPosition() > 6 && b5.getXPosition() < 750 && b5.getYPosition() > 0)
+                     if (b[4].getXPosition() > 6 && b[4].getXPosition() < 750 && b[4].getYPosition() > 0)
                      {
-                    	 b5.setXPosition(b5.getXPosition() - (eq1 * directionX5));
-                    	 b5.setYPosition(b5.getYPosition() - eq2 * directionY5);
+                    	 b[4].setXPosition(b[4].getXPosition() - (eq1 * directionX[4]));
+                    	 b[4].setYPosition(b[4].getYPosition() - eq2 * directionY[4]);
                      }
                      
-                     if (b5.getXPosition() >= 743)
+                     if (b[4].getXPosition() >= 743)
                      {
-                    	 directionX5 = - directionX5;
+                    	 directionX[4] = - directionX[4];
                      }
                      
-                     if (b5.getXPosition() <= 10)
+                     if (b[4].getXPosition() <= 10)
                      {
-                    	 directionX5 = - directionX5;
+                    	 directionX[4] = - directionX[4];
                      }
                      
-                     if (b5.getYPosition() <= 10)
+                     if (b[4].getYPosition() <= 10)
                      {
-                    	 directionY5 = - directionY5;
-                     }
+                    	 directionY[4] = - directionY[4];
+                     } 
                  }
                  
                  
+                 
+            	 for (int counter = 0; counter < 5; counter++)
+                 {
+                  
+            	 	 if ( (b[counter].getXPosition() > 158 && b[counter].getXPosition() < 165) && 
+            			  (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
+            			   singlebounce == false)
+                     {
+                    	 template.removeRectangle(brick[0]);
+                    	 directionX[counter] = - directionX[counter];
+                    	 singlebounce = true;
+                     }
+            		 else if ( (b[counter].getXPosition() > 230 && b[counter].getXPosition() < 240) && 
+            			       (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
+            			        singlebounce == false)
+                     {
+                    	 template.removeRectangle(brick[0]);
+                    	 directionX[counter] = - directionX[counter];
+                    	 singlebounce = true;
+                     } 
+            		 else if ( (b[counter].getXPosition() > 160 && b[counter].getXPosition() < 240) && 
+            			  (b[counter].getYPosition() > 185 && b[counter].getYPosition() < 192) &&
+            			   singlebounce == false)
+                     {
+                    	 template.removeRectangle(brick[0]);
+                    	 directionY[counter] = - directionY[counter];
+                    	 singlebounce = true;
+                     }	 
+            		 else if ( (b[counter].getXPosition() > 160 && b[counter].getXPosition() < 240) && 
+            			  (b[counter].getYPosition() > 215 && b[counter].getYPosition() < 222) &&
+            			   singlebounce == false)
+                     {
+                    	 template.removeRectangle(brick[0]);
+                    	 directionY[counter] = - directionY[counter];
+                    	 singlebounce = true;
+                     } 
+                 }
+            	 
+            	 
                  template.pause();
                  template.update();
              }       
