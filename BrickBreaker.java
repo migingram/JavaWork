@@ -14,7 +14,7 @@ public class BrickBreaker
     	Arrow aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
 
     	    
-        Rectangle[] b = new Rectangle[25];
+        Rectangle[] brick = new Rectangle[25];
     	    
         int marginX = 0;
         int marginY = 0;
@@ -29,23 +29,23 @@ public class BrickBreaker
      	 
             if ((counter1 >= 0 && counter1 < 5) || (counter1 > 19 && counter1 < 25))
             {
-     	        b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#b87333");
-                template.addRectangle(b[counter1]);
+            	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#b87333");
+                template.addRectangle(brick[counter1]);
      	    }
      	    else if ((counter1 > 4 && counter1 < 11) || (counter1 > 13 && counter1 < 20))
      	    {
-     	  	    b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#5a5b5e");
-                template.addRectangle(b[counter1]);
+     	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#5a5b5e");
+                template.addRectangle(brick[counter1]);
      	    }
      	    else if ((counter1 == 11) || (counter1 == 13))
      	    {
-     		    b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#D4AF37");
-                template.addRectangle(b[counter1]);
+     	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#D4AF37");
+                template.addRectangle(brick[counter1]);
      	    }
      	    else if ((counter1 == 12))
      	    {
-     		    b[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#dce1ea");
-                template.addRectangle(b[counter1]);
+     	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#dce1ea");
+                template.addRectangle(brick[counter1]);
      	    }
           
             marginX = marginX + 90;
@@ -56,17 +56,33 @@ public class BrickBreaker
         
         
         boolean change = false;
-        
-        Rectangle paddle1 = new Rectangle(385, 580, 80, 10, "FFFFFF");
-	    Rectangle paddle2 = new Rectangle(352, 585, 14, 20, "FFFFFF");
-	    Rectangle paddle3 = new Rectangle(418, 585, 14, 20, "FFFFFF");
 	    
-	    Ball ball = new Ball(385, 560, 6, "FFFFFF");
+	    Ball b1 = new Ball(385, 560, 6, "FFFFFF");
+	    Ball b2 = new Ball(385, 560, 6, "FFFFFF");
+	    Ball b3 = new Ball(385, 560, 6, "FFFFFF");
+	    Ball b4 = new Ball(385, 560, 6, "FFFFFF");
+	    Ball b5 = new Ball(385, 560, 6, "FFFFFF");
 	    
+	    int pause = 0;
 	    
         double eq1 = 0;
-        int direction1 = 1;
-        int direction2 = 1;
+        double eq2 = 0;
+        
+        int directionX1 = 1;
+        int directionY1 = 1;
+        
+        int directionX2 = 1;
+        int directionY2 = 1;
+        
+        int directionX3 = 1;
+        int directionY3 = 1;
+        
+        int directionX4 = 1;
+        int directionY4 = 1;
+        
+        int directionX5 = 1;
+        int directionY5 = 1;
+        
 	            
         
 	    while (true)
@@ -77,12 +93,12 @@ public class BrickBreaker
             	 if (template.spacePressed())
                  {
             		 aim.setColour("000000");
-         	         
-         	         template.addRectangle(paddle1);
-                     template.addRectangle(paddle2);
-                     template.addRectangle(paddle3);
                      
-                     template.addBall(ball);
+                     template.addBall(b1);
+                     template.addBall(b2);
+                     template.addBall(b3);
+                     template.addBall(b4);
+                     template.addBall(b5);
                     
                      template.update();
           	         
@@ -112,12 +128,12 @@ public class BrickBreaker
             	 if (template.spacePressed())
                  {
          	         aim.setColour("000000");
-         	         
-         	         template.addRectangle(paddle1);
-                     template.addRectangle(paddle2);
-                     template.addRectangle(paddle3);
-                     
-                     template.addBall(ball);
+
+                     template.addBall(b1);
+                     template.addBall(b2);
+                     template.addBall(b3);
+                     template.addBall(b4);
+                     template.addBall(b5);
                     
                      template.update();
           	         
@@ -142,22 +158,6 @@ public class BrickBreaker
              
              while (change == true)
              {
-            	 if ((template.rightPressed()) && (paddle1.getXPosition() < 700))
-     	         {
-     		         paddle1.setXPosition(paddle1.getXPosition() + 12);
-     		         paddle2.setXPosition(paddle2.getXPosition() + 12);
-     		         paddle3.setXPosition(paddle3.getXPosition() + 12);
-     	         }
-                
-                if ((template.leftPressed()) && (paddle1.getXPosition() > 55))
-     	         {
-     		         paddle1.setXPosition(paddle1.getXPosition() - 12);
-     		         paddle2.setXPosition(paddle2.getXPosition() - 12);
-     		         paddle3.setXPosition(paddle3.getXPosition() - 12);
-     	         }
-                
-               
-                
                  if (aim.getStartX() > aim.getEndX())
                  {
                 	 eq1 = Math.sqrt(aim.getStartX() - aim.getEndX());
@@ -171,32 +171,124 @@ public class BrickBreaker
                 	 eq1 = 0;
                  }
                  
-                 double eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
+                 eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
                  
-                 if (ball.getXPosition() > 6 && ball.getXPosition() < 750 && ball.getYPosition() > 0)
+                 if (b1.getXPosition() > 6 && b1.getXPosition() < 750 && b1.getYPosition() > 0)
                  {
-                     ball.setXPosition(ball.getXPosition() - (eq1 * direction1));
-                     ball.setYPosition(ball.getYPosition() - eq2 * direction2);
-                 }
-                 
-                 if (ball.getXPosition() >= 743)
-                 {
-                	 direction1 = - direction1;
+                     b1.setXPosition(b1.getXPosition() - (eq1 * directionX1));
+                     b1.setYPosition(b1.getYPosition() - eq2 * directionY1);
                  }
                  
-                 if (ball.getXPosition() <= 10)
+                 if (b1.getXPosition() >= 743)
                  {
-                	 direction1 = - direction1;
-                 }
-                 if (ball.getYPosition() <= 10)
-                 {
-                	 direction2 = - direction2;
+                	 directionX1 = - directionX1;
                  }
                  
-                 if ((ball.getYPosition() == paddle1.getYPosition()) && (ball.getXPosition() == paddle1.getXPosition()))
+                 if (b1.getXPosition() <= 10)
                  {
-                	 direction2 = - direction2;
+                	 directionX1 = - directionX1;
                  }
+                 if (b1.getYPosition() <= 10)
+                 {
+                	 directionY1 = - directionY1;
+                 }
+                 
+                 pause = pause + 1;
+                 
+                 if (pause >= 10)
+                 {                 
+                     if (b2.getXPosition() > 6 && b2.getXPosition() < 750 && b2.getYPosition() > 0)
+                     {
+                    	 b2.setXPosition(b2.getXPosition() - (eq1 * directionX2));
+                    	 b2.setYPosition(b2.getYPosition() - eq2 * directionY2);
+                     }
+                     
+                     if (b2.getXPosition() >= 743)
+                     {
+                    	 directionX2 = - directionX2;
+                     }
+                     
+                     if (b2.getXPosition() <= 10)
+                     {
+                    	 directionX2 = - directionX2;
+                     }
+                     if (b2.getYPosition() <= 10)
+                     {
+                    	 directionY2 = - directionY2;
+                     }
+                 }
+                 
+                 if (pause >= 20)
+                 {                 
+                     if (b3.getXPosition() > 6 && b3.getXPosition() < 750 && b3.getYPosition() > 0)
+                     {
+                    	 b3.setXPosition(b3.getXPosition() - (eq1 * directionX3));
+                    	 b3.setYPosition(b3.getYPosition() - eq2 * directionY3);
+                     }
+                     
+                     if (b3.getXPosition() >= 743)
+                     {
+                    	 directionX3 = - directionX3;
+                     }
+                     
+                     if (b3.getXPosition() <= 10)
+                     {
+                    	 directionX3 = - directionX3;
+                     }
+                     if (b3.getYPosition() <= 10)
+                     {
+                    	 directionY3 = - directionY3;
+                     }
+                 }
+                 
+                 if (pause >= 30)
+                 {                 
+                     if (b4.getXPosition() > 6 && b4.getXPosition() < 750 && b4.getYPosition() > 0)
+                     {
+                    	 b4.setXPosition(b4.getXPosition() - (eq1 * directionX4));
+                    	 b4.setYPosition(b4.getYPosition() - eq2 * directionY4);
+                     }
+                     
+                     if (b4.getXPosition() >= 743)
+                     {
+                    	 directionX4 = - directionX4;
+                     }
+                     
+                     if (b4.getXPosition() <= 10)
+                     {
+                    	 directionX4 = - directionX4;
+                     }
+                     
+                     if (b4.getYPosition() <= 10)
+                     {
+                    	 directionY4 = - directionY4;
+                     }
+                 }
+                 
+                 if (pause >= 40)
+                 {                 
+                     if (b5.getXPosition() > 6 && b5.getXPosition() < 750 && b5.getYPosition() > 0)
+                     {
+                    	 b5.setXPosition(b5.getXPosition() - (eq1 * directionX5));
+                    	 b5.setYPosition(b5.getYPosition() - eq2 * directionY5);
+                     }
+                     
+                     if (b5.getXPosition() >= 743)
+                     {
+                    	 directionX5 = - directionX5;
+                     }
+                     
+                     if (b5.getXPosition() <= 10)
+                     {
+                    	 directionX5 = - directionX5;
+                     }
+                     
+                     if (b5.getYPosition() <= 10)
+                     {
+                    	 directionY5 = - directionY5;
+                     }
+                 }
+                 
                  
                  template.pause();
                  template.update();
@@ -207,4 +299,5 @@ public class BrickBreaker
 
 
                                                               
+
 
