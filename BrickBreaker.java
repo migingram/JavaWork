@@ -116,6 +116,8 @@ public class BrickBreaker
        
        double speed = 2;
        
+       int drop = 0;
+       
       
         
 	    while (true)
@@ -327,12 +329,24 @@ public class BrickBreaker
                 	 b[4].getYPosition() >= 720 &&
                 	 b[5].getYPosition() >= 720 &&
                 	 b[6].getYPosition() >= 720 &&
-                	 b[7].getYPosition() >= 720)
+                	 b[7].getYPosition() >= 720 &&
+                	 points.getHeight() < 278)
                  {
                 	 
                      template.addText(Try);
                      template.addText(Again);
+                     
+                     if (drop == 30 || drop == 60 || drop == 90|| drop == 120 || drop == 150 || drop == 180 || drop == 210 || drop == 240 || drop == 270 || drop == 300 || drop == 330)
+                     {
+                    	 for (int counter = 0; counter < 25; counter++)
+                         {
+                        	 brick[counter].setYPosition(brick[counter].getYPosition() + 40);
+                         }
+                     }
+                     
+                     drop = drop + 1;
                  }
+                 
                  
             	 
                  if (points.getHeight() >= 278)
