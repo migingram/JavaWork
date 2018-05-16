@@ -20,6 +20,11 @@ public class BrickBreaker
         Text Try = new Text("TRY",850,180,22,"FFFFFF");
         Text Again = new Text("A G A I N ?",800,220,26,"FFFFFF");
         
+        Text Game = new Text("G A M E", 90, 150, 150, "FFFFFF");
+        Text Over = new Text("O V E R", 90, 520, 150, "FFFFFF");
+        
+        Text Winner = new Text("W I N N E R !", 35, 320, 100, "FFFFFF");
+        
         Text progress1 = new Text("!",968,578,30,"#b87333");
         Text progress2 = new Text("!",968,508,30,"#5a5b5e");
         Text progress3 = new Text("!",968,438,30,"#D4AF37");
@@ -31,6 +36,7 @@ public class BrickBreaker
         template.addText(AIM);
         template.addText(AndPress);
         template.addText(SPACE);
+        
         
         
     	Text[] t = new Text[25];
@@ -134,316 +140,373 @@ public class BrickBreaker
        
        double speed = 2;
        
-       int drop = 0;
+       int set1 = 0;
+       int set2 = 0;
        
+
       
-        
-	    while (true)
-        {   
-             while ((aim.getStartX() <= aim.getEndX()) && (change == false))
-             {
-            	 
-            	 if (template.spacePressed())
-                 {
-            		 aim.setColour("000000");
-                     
-            		 for (int counter = 0; counter < 8; counter++)
-            		 {
-            			 template.addBall(b[counter]);
-            		 }
-            		 
-            		 template.addText(progress1);
-          	         
-          	         change = true;
-                 }
-            	 
-            	 
-            	 if (template.leftPressed() )
-        	     {
-        		     aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() - 1);
-        	     }
-            	 
-            	 if ((aim.getEndY() < 575) && (template.rightPressed()))
-            	 {
-        		     aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() + 1);
-            	 }
-            
-                   template.pause();
-                   template.update();
-             }
-             
-
-             while ((aim.getStartX() > aim.getEndX()) && (change == false))
-             {     
-            	 
-            	 
-            	 if (template.spacePressed())
-                 {
-         	         aim.setColour("000000");
-
-         	        for (int counter = 0; counter < 8; counter++)
-           		    {
-           			     template.addBall(b[counter]);
-           		    } 
-         	        
-         	       template.addText(progress1);
-
-          	         change = true;       
-                 }
-            	      	 
-            	 
-        	       if (template.rightPressed())
-        	       {
-        		       aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() - 1);
-        	       }
-        	           
-        	       if ((aim.getEndY() < 575) && (template.leftPressed()))
-                   {
-        	           aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() + 1);
-        	       }
-
-                   template.pause();
-                   template.update();
-             }
-             
-             
-             while (change == true)
-             {
-            	 
-                 template.removeText(AIM);
-                 template.removeText(AndPress);
-                 template.removeText(SPACE);
-                 
-                 
-                 if (aim.getStartX() > aim.getEndX())
-                 {
-                	 eq1 = Math.sqrt(aim.getStartX() - aim.getEndX());
-                 }
-                 else if (aim.getStartX() < aim.getEndX())
-                 {
-                	 eq1 =  - (Math.sqrt(aim.getEndX() - aim.getStartX()));
-                 }
-                 else 
-                 {
-                	 eq1 = 0;
-                 }
-                 
-                 eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
-                 
-                 
-                 int nextBall = 0;
-                 
-                 for (int ballTrack = 0; ballTrack < 8; ballTrack++)
-                 {
-                	 if (pause >= nextBall)
-                     {                 
-                         if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 754 && b[ballTrack].getYPosition() > 0)
-                         {
-                        	 b[ballTrack].setXPosition(b[ballTrack].getXPosition() - (eq1 * directionX[ballTrack]) * speed);
-                        	 b[ballTrack].setYPosition(b[ballTrack].getYPosition() - (eq2 * directionY[ballTrack]) * speed);
-                         }
-                         
-                         if (b[ballTrack].getXPosition() >= 742)
-                         {
-                        	 directionX[ballTrack] = - directionX[ballTrack];
-                         }
-                         
-                         if (b[ballTrack].getXPosition() <= 12)
-                         {
-                        	 directionX[ballTrack] = - directionX[ballTrack];
-                         }
-                         
-                         if (b[ballTrack].getYPosition() <= 12)
-                         {
-                        	 directionY[ballTrack] = - directionY[ballTrack];
-                         }
-                     }
-                	 
-                	 nextBall = nextBall + 7;
-                 }
-                     	                     
-                 pause = pause + 1;
-                 
-                
-                 
-                 
-                 int margin1 = 0;
-                 int margin2 = 0;
-                 
-                 int totalBricks = 0;
-          	            
-                 
-                 for (int brickCount = 0; brickCount < 5; brickCount++)
-                 {
-                	 margin1 = 0;
-                	 
-                	 for (int brickCount2 = 0; brickCount2 < 5; brickCount2++)
-                	 {
-                		 for (int counter = 0; counter < 8; counter++)
-                         {
-                			    
-                    	 	 if ( (b[counter].getXPosition() > 156 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
-                    			  (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
-                    			   singlebounce[totalBricks] == false)
-                             {
-                            	
-                            	 directionX[counter] = - directionX[counter];
-                            	                            
-                            	 int shift = Integer.parseInt(life[totalBricks].getText());
-                            	 shift = shift - 1;
-                            	 
-                            	 String shift2 = String.valueOf(shift);                       	 
-                            	 life[totalBricks].setText(shift2);
-                            	 
-                            	 if (shift == 0)
-                            	 {
-                            		 template.removeRectangle(brick[totalBricks]);
-                            		 
-                            		 points.setHeight(points.getHeight() + 11.2);
-                                	 points.setYPosition(points.getYPosition() - 5.7);
-                                	 
-                                	 singlebounce[totalBricks] = true;
-                            	 }
-                            	 
-                             }
-                    		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 246 + margin1) && 
-                    			       (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
-                    			        singlebounce[totalBricks] == false)
-                             {
-
-                            	 directionX[counter] = - directionX[counter];
-                            	                                                    	                                               	 
-                            	 int shift = Integer.parseInt(life[totalBricks].getText());
-                            	 shift = shift - 1;
-                            	 
-                            	 String shift2 = String.valueOf(shift);                           	 
-                            	 life[totalBricks].setText(shift2);
-                            	 
-                            	 if (shift == 0)
-                            	 {
-                            		 template.removeRectangle(brick[totalBricks]);
-                            		 
-                            		 points.setHeight(points.getHeight() + 11.2);
-                                	 points.setYPosition(points.getYPosition() - 5.7);
-                                	 
-                                	 singlebounce[totalBricks] = true;
-                            	 }
-                            	 
-                             } 
-                    		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
-                    			       (b[counter].getYPosition() > 178 + margin2 && b[counter].getYPosition() < 192 + margin2) &&
-                    			        singlebounce[totalBricks] == false)
-                             {
-                    			 
-                            	 directionY[counter] = - directionY[counter];
-                                                    	 
-                            	 int shift = Integer.parseInt(life[totalBricks].getText());
-                            	 shift = shift - 1;
-                            	 
-                            	 String shift2 = String.valueOf(shift);                           	 
-                            	 life[totalBricks].setText(shift2);
-                            	 
-                            	 if (shift == 0)
-                            	 {
-                            		 template.removeRectangle(brick[totalBricks]);
-                            		 
-                            		 points.setHeight(points.getHeight() + 11.2);
-                                	 points.setYPosition(points.getYPosition() - 5.7);
-                                	 
-                                	 singlebounce[totalBricks] = true;
-                            	 }
-                            	 
-                             }	 
-                    		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
-                    			       (b[counter].getYPosition() > 215 + margin2 && b[counter].getYPosition() < 223 + margin2) &&
-                    			       singlebounce[totalBricks] == false)
-                             {
-                    			 
-                            	 directionY[counter] = - directionY[counter];
-                                                     	 
-                            	 int shift = Integer.parseInt(life[totalBricks].getText());
-                            	 shift = shift - 1;
-                            	 
-                            	 String shift2 = String.valueOf(shift);                        	 
-                            	 life[totalBricks].setText(shift2);
-                            	 
-                            	 if (shift == 0)
-                            	 {
-                            		 template.removeRectangle(brick[totalBricks]);
-                            		 
-                            		 points.setHeight(points.getHeight() + 11.2);
-                                	 points.setYPosition(points.getYPosition() - 5.7);
-                                	 
-                                	 singlebounce[totalBricks] = true;
-                            	 }
-                             } 
-                         }                    	 
-                    	 margin1 = margin1 + 90;
-                    	 totalBricks = totalBricks + 1;
-                	 }                	 
-                	 margin2 = margin2 + 40;               	 
-                 }
-                 
-                 
-                 
-                 if (b[0].getYPosition() >= 720 &&
-                     b[1].getYPosition() >= 720 &&
-                	 b[2].getYPosition() >= 720 &&
-                	 b[3].getYPosition() >= 720 &&
-                	 b[4].getYPosition() >= 720 &&
-                	 b[5].getYPosition() >= 720 &&
-                	 b[6].getYPosition() >= 720 &&
-                	 b[7].getYPosition() >= 720 &&
-                	 points.getHeight() < 278)
+    	    while (true)
+            {   
+                 while ((aim.getStartX() <= aim.getEndX()) && (change == false))
                  {
                 	 
-                     template.addText(Try);
-                     template.addText(Again);
-                     
-                     if (drop == 30 || drop == 60 || drop == 90|| drop == 120 || drop == 150 || drop == 180 || drop == 210 || drop == 240 || drop == 270 || drop == 300 || drop == 330)
+                	 if (template.spacePressed())
                      {
-                    	 for (int counter = 0; counter < 25; counter++)
-                         {
-                        	 brick[counter].setYPosition(brick[counter].getYPosition() + 40);
-                        	 life[counter].setYPosition(life[counter].getYPosition() + 40);
-                         }
+                		 aim.setColour("000000");
+                         
+                		 for (int counter = 0; counter < 8; counter++)
+                		 {
+                			 template.addBall(b[counter]);
+                		 }
+                		 
+                		 template.addText(progress1);
+              	         
+              	         change = true;
+                     }
+                	 
+                	 
+                	 if (template.leftPressed() )
+            	     {
+            		     aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() - 1);
+            	     }
+                	 
+                	 if ((aim.getEndY() < 578) && (template.rightPressed()))
+                	 {
+            		     aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() + 1);
+                	 }
+                
+                       template.pause();
+                       template.update();
+                 }
+                 
+
+                 while ((aim.getStartX() > aim.getEndX()) && (change == false))
+                 {     
+                	 
+                	 
+                	 if (template.spacePressed())
+                     {
+             	         aim.setColour("000000");
+
+             	        for (int counter = 0; counter < 8; counter++)
+               		    {
+               			     template.addBall(b[counter]);
+               		    } 
+             	        
+             	       template.addText(progress1);
+
+              	         change = true;       
+                     }
+                	      	 
+                	 
+            	       if (template.rightPressed())
+            	       {
+            		       aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() - 1);
+            	       }
+            	           
+            	       if ((aim.getEndY() < 578) && (template.leftPressed()))
+                       {
+            	           aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() + 1);
+            	       }
+
+                       template.pause();
+                       template.update();
+                 }
+                 
+                 
+                 while (change == true)
+                 {
+                	 
+                     template.removeText(AIM);
+                     template.removeText(AndPress);
+                     template.removeText(SPACE);
+                     
+                     
+                     if (aim.getStartX() > aim.getEndX())
+                     {
+                    	 eq1 = Math.sqrt(aim.getStartX() - aim.getEndX());
+                     }
+                     else if (aim.getStartX() < aim.getEndX())
+                     {
+                    	 eq1 =  - (Math.sqrt(aim.getEndX() - aim.getStartX()));
+                     }
+                     else 
+                     {
+                    	 eq1 = 0;
                      }
                      
-                     drop = drop + 1;
-                 }
-                 
-                 
-            	 
-                 if (points.getHeight() >= 278)
-                 {
-                	 template.addText(progress5);
-                 }
-                 else if (points.getHeight() >= 210)
-                 {
-                	 points.setColour("#dce1ea");
-                	 template.addText(progress4);
-                 }
-                 else if (points.getHeight() >= 140)
-                 {
-                	 points.setColour("#D4AF37");
-                	 template.addText(progress3);
-                 }
-                 else if (points.getHeight() >= 70)
-                 {
-                	 points.setColour("#5a5b5e");
-                	 template.addText(progress2);
-                 }
-                 else if (points.getHeight() >= 0)
-                 {
-                	 points.setColour("#b87333");
-                 }
-                 
-            	 
-            	 
-                 template.pause();
-                 template.update();
-             }       
-        }  
+                     eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
+                     
+                     
+                     int nextBall = 0;
+                     
+                     for (int ballTrack = 0; ballTrack < 8; ballTrack++)
+                     {
+                    	 if (pause >= nextBall)
+                         {                 
+                             if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 754 && b[ballTrack].getYPosition() > 0)
+                             {
+                            	 b[ballTrack].setXPosition(b[ballTrack].getXPosition() - (eq1 * directionX[ballTrack]) * speed);
+                            	 b[ballTrack].setYPosition(b[ballTrack].getYPosition() - (eq2 * directionY[ballTrack]) * speed);
+                             }
+                             
+                             if (b[ballTrack].getXPosition() >= 742)
+                             {
+                            	 directionX[ballTrack] = - directionX[ballTrack];
+                             }
+                             
+                             if (b[ballTrack].getXPosition() <= 12)
+                             {
+                            	 directionX[ballTrack] = - directionX[ballTrack];
+                             }
+                             
+                             if (b[ballTrack].getYPosition() <= 12)
+                             {
+                            	 directionY[ballTrack] = - directionY[ballTrack];
+                             }
+                         }
+                    	 
+                    	 nextBall = nextBall + 7;
+                     }
+                         	                     
+                     pause = pause + 1;
+                     
+                    
+                     
+                     int margin1 = set1;
+                     int margin2 = set2;                    
+                     
+                     int totalBricks = 0;
+              	            
+                     
+                     for (int brickCount = 0; brickCount < 5; brickCount++)
+                     {
+                    	 margin1 = 0;
+                    	 
+                    	 for (int brickCount2 = 0; brickCount2 < 5; brickCount2++)
+                    	 {
+                    		 for (int counter = 0; counter < 8; counter++)
+                             {
+                    			    
+                        	 	 if ( (b[counter].getXPosition() > 156 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
+                        			  (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
+                        			   singlebounce[totalBricks] == false)
+                                 {
+                                	
+                                	 directionX[counter] = - directionX[counter];
+                                	                            
+                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+                                	 shift = shift - 1;
+                                	 
+                                	 String shift2 = String.valueOf(shift);                       	 
+                                	 life[totalBricks].setText(shift2);
+                                	 
+                                	 if (shift == 0)
+                                	 {
+                                		 template.removeRectangle(brick[totalBricks]);
+                                		 
+                                		 points.setHeight(points.getHeight() + 11.2);
+                                    	 points.setYPosition(points.getYPosition() - 5.7);
+                                    	 
+                                    	 singlebounce[totalBricks] = true;
+                                	 }
+                                	 
+                                 }
+                        		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 246 + margin1) && 
+                        			       (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
+                        			        singlebounce[totalBricks] == false)
+                                 {
+
+                                	 directionX[counter] = - directionX[counter];
+                                	                                                    	                                               	 
+                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+                                	 shift = shift - 1;
+                                	 
+                                	 String shift2 = String.valueOf(shift);                           	 
+                                	 life[totalBricks].setText(shift2);
+                                	 
+                                	 if (shift == 0)
+                                	 {
+                                		 template.removeRectangle(brick[totalBricks]);
+                                		 
+                                		 points.setHeight(points.getHeight() + 11.2);
+                                    	 points.setYPosition(points.getYPosition() - 5.7);
+                                    	 
+                                    	 singlebounce[totalBricks] = true;
+                                	 }
+                                	 
+                                 } 
+                        		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                        			       (b[counter].getYPosition() > 178 + margin2 && b[counter].getYPosition() < 192 + margin2) &&
+                        			        singlebounce[totalBricks] == false)
+                                 {
+                        			 
+                                	 directionY[counter] = - directionY[counter];
+                                                        	 
+                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+                                	 shift = shift - 1;
+                                	 
+                                	 String shift2 = String.valueOf(shift);                           	 
+                                	 life[totalBricks].setText(shift2);
+                                	 
+                                	 if (shift == 0)
+                                	 {
+                                		 template.removeRectangle(brick[totalBricks]);
+                                		 
+                                		 points.setHeight(points.getHeight() + 11.2);
+                                    	 points.setYPosition(points.getYPosition() - 5.7);
+                                    	 
+                                    	 singlebounce[totalBricks] = true;
+                                	 }
+                                	 
+                                 }	 
+                        		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                        			       (b[counter].getYPosition() > 215 + margin2 && b[counter].getYPosition() < 223 + margin2) &&
+                        			       singlebounce[totalBricks] == false)
+                                 {
+                        			 
+                                	 directionY[counter] = - directionY[counter];
+                                                         	 
+                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+                                	 shift = shift - 1;
+                                	 
+                                	 String shift2 = String.valueOf(shift);                        	 
+                                	 life[totalBricks].setText(shift2);
+                                	 
+                                	 if (shift == 0)
+                                	 {
+                                		 template.removeRectangle(brick[totalBricks]);
+                                		 
+                                		 points.setHeight(points.getHeight() + 11.2);
+                                    	 points.setYPosition(points.getYPosition() - 5.7);
+                                    	 
+                                    	 singlebounce[totalBricks] = true;
+                                	 }
+                                 } 
+                             }    
+                    		 
+                        	 margin1 = margin1 + 90;
+                        	 totalBricks = totalBricks + 1;
+                    	 }   
+                    	 
+                    	 margin2 = margin2 + 40;               	 
+                     }
+                     
+                     
+                     
+                     if (b[0].getYPosition() >= 720 &&
+                         b[1].getYPosition() >= 720 &&
+                    	 b[2].getYPosition() >= 720 &&
+                    	 b[3].getYPosition() >= 720 &&
+                    	 b[4].getYPosition() >= 720 &&
+                    	 b[5].getYPosition() >= 720 &&
+                    	 b[6].getYPosition() >= 720 &&
+                    	 b[7].getYPosition() >= 720 &&
+                    	 points.getHeight() < 278)
+                     {
+                    	 
+                        	 for (int counter = 0; counter < 25; counter++)
+                             {
+                            	 brick[counter].setYPosition(brick[counter].getYPosition() + 40);
+                            	 life[counter].setYPosition(life[counter].getYPosition() + 40);
+                             }
+                        	 
+                        	 aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
+                        	 
+                             for (int valcount = 0; valcount < 8; valcount++)
+                             {
+                             	b[valcount] = new Ball(385, 560, 6, "FFFFFF");
+                             }
+                             
+                             pause = 0;
+                     	    
+                             eq1 = 0;
+                             eq2 = 0;
+                             
+                            for (int valcount = 0; valcount < 8; valcount++)
+                            {
+                         	   directionX[valcount] = 1;
+                         	   directionY[valcount] = 1;
+                            }
+ 
+
+                            set1 = 0;
+                            set2 = set2 + 40;
+                             
+                        	change = false;
+                         
+                     }
+                     
+                     
+                     
+                     if (b[0].getYPosition() >= 720 &&
+                             b[1].getYPosition() >= 720 &&
+                        	 b[2].getYPosition() >= 720 &&
+                        	 b[3].getYPosition() >= 720 &&
+                        	 b[4].getYPosition() >= 720 &&
+                        	 b[5].getYPosition() >= 720 &&
+                        	 b[6].getYPosition() >= 720 &&
+                        	 b[7].getYPosition() >= 720 &&
+                        	 points.getHeight() >= 278)
+                     {
+                    	 template.addText(Winner);
+                     }
+                    	 
+                    	 
+                     
+                     
+                	 
+                     if (points.getHeight() >= 278)
+                     {
+                    	 template.addText(progress5);
+                     }
+                     else if (points.getHeight() >= 210)
+                     {
+                    	 points.setColour("#dce1ea");
+                    	 template.addText(progress4);
+                     }
+                     else if (points.getHeight() >= 140)
+                     {
+                    	 points.setColour("#D4AF37");
+                    	 template.addText(progress3);
+                     }
+                     else if (points.getHeight() >= 70)
+                     {
+                    	 points.setColour("#5a5b5e");
+                    	 template.addText(progress2);
+                     }
+                     else if (points.getHeight() >= 0)
+                     {
+                    	 points.setColour("#b87333");
+                     }
+                     
+                     
+                     
+                     for (int counter = 0; counter < 25; counter++)
+                     {
+                    	 if (brick[counter].getYPosition() > 540)
+                    	 {
+                    		 aim.setColour("000000");
+                    		 
+                    	     template.addText(Game);
+                    	     template.addText(Over);
+                    	     template.addText(Try);
+                    	     template.addText(Again);
+                    	     
+                    	    
+                             template.update();
+                    	     
+                    	     while (true)
+                    	     { }
+                    	 }
+                     }
+                     
+                	 
+                	 
+                     template.pause();
+                     template.update();
+                 }       
+            }
     }
 }
 
