@@ -79,12 +79,13 @@ public class BrickBreaker
     	   directionY[valcount] = 1;
        }
        
-       boolean[] singlebounce = new boolean[5];
+       boolean[] singlebounce = new boolean[25];
        
-       for (int assign = 0; assign < 5; assign++)
+       for (int assign = 0; assign < 25; assign++)
        {
     	   singlebounce[assign] = false;
        }
+       
       
         
 	    while (true)
@@ -187,7 +188,7 @@ public class BrickBreaker
                 	 directionX[0] = - directionX[0];
                  }
                  
-                 if (b[0].getXPosition() <= 13)
+                 if (b[0].getXPosition() <= 12)
                  {
                 	 directionX[0] = - directionX[0];
                  }
@@ -217,11 +218,11 @@ public class BrickBreaker
                     	 directionX[1] = - directionX[1];
                      }
                      
-                     if (b[1].getXPosition() <= 10)
+                     if (b[1].getXPosition() <= 12)
                      {
                     	 directionX[1] = - directionX[1];
                      }
-                     if (b[1].getYPosition() <= 10)
+                     if (b[1].getYPosition() <= 12)
                      {
                     	 directionY[1] = - directionY[1];
                      }
@@ -243,11 +244,11 @@ public class BrickBreaker
                     	 directionX[2] = - directionX[2];
                      }
                      
-                     if (b[2].getXPosition() <= 10)
+                     if (b[2].getXPosition() <= 12)
                      {
                     	 directionX[2] = - directionX[2];
                      }
-                     if (b[2].getYPosition() <= 10)
+                     if (b[2].getYPosition() <= 12)
                      {
                     	 directionY[2] = - directionY[2];
                      }  
@@ -269,12 +270,12 @@ public class BrickBreaker
                     	 directionX[3] = - directionX[3];
                      }
                      
-                     if (b[3].getXPosition() <= 10)
+                     if (b[3].getXPosition() <= 12)
                      {
                     	 directionX[3] = - directionX[3];
                      }
                      
-                     if (b[3].getYPosition() <= 10)
+                     if (b[3].getYPosition() <= 12)
                      {
                     	 directionY[3] = - directionY[3];
                      }
@@ -296,12 +297,12 @@ public class BrickBreaker
                     	 directionX[4] = - directionX[4];
                      }
                      
-                     if (b[4].getXPosition() <= 10)
+                     if (b[4].getXPosition() <= 12)
                      {
                     	 directionX[4] = - directionX[4];
                      }
                      
-                     if (b[4].getYPosition() <= 10)
+                     if (b[4].getYPosition() <= 12)
                      {
                     	 directionY[4] = - directionY[4];
                      } 
@@ -310,48 +311,56 @@ public class BrickBreaker
                  
                  int margin1 = 0;
                  int margin2 = 0;
+                 
+                 int totalBricks = 0;
           	            
                  
                  for (int brickCount = 0; brickCount < 5; brickCount++)
                  {
-                	 for (int counter = 0; counter < 5; counter++)
-                     {
-                      
-                	 	 if ( (b[counter].getXPosition() > 158 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
-                			  (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
-                			   singlebounce[brickCount] == false)
-                         {
-                        	 template.removeRectangle(brick[brickCount]);
-                        	 directionX[counter] = - directionX[counter];
-                        	 singlebounce[brickCount] = true;
-                         }
-                		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
-                			       (b[counter].getYPosition() > 190 && b[counter].getYPosition() < 220) &&
-                			        singlebounce[brickCount] == false)
-                         {
-                        	 template.removeRectangle(brick[brickCount]);
-                        	 directionX[counter] = - directionX[counter];
-                        	 singlebounce[brickCount] = true;
-                         } 
-                		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
-                			  (b[counter].getYPosition() > 185 && b[counter].getYPosition() < 192) &&
-                			  singlebounce[brickCount] == false)
-                         {
-                        	 template.removeRectangle(brick[brickCount]);
-                        	 directionY[counter] = - directionY[counter];
-                        	 singlebounce[brickCount] = true;
-                         }	 
-                		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
-                			  (b[counter].getYPosition() > 215 && b[counter].getYPosition() < 222) &&
-                			  singlebounce[brickCount] == false)
-                         {
-                        	 template.removeRectangle(brick[brickCount]);
-                        	 directionY[counter] = - directionY[counter];
-                        	 singlebounce[brickCount] = true;
-                         } 
-                     }
+                	 margin1 = 0;
                 	 
-                	 margin1 = margin1 + 90;
+                	 for (int brickCount2 = 0; brickCount2 < 5; brickCount2++)
+                	 {
+                		 for (int counter = 0; counter < 5; counter++)
+                         {
+                			    
+                    	 	 if ( (b[counter].getXPosition() > 158 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
+                    			  (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
+                    			   singlebounce[totalBricks] == false)
+                             {
+                            	 template.removeRectangle(brick[totalBricks]);
+                            	 directionX[counter] = - directionX[counter];
+                            	 singlebounce[totalBricks] = true;
+                             }
+                    		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                    			       (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
+                    			        singlebounce[totalBricks] == false)
+                             {
+                            	 template.removeRectangle(brick[totalBricks]);
+                            	 directionX[counter] = - directionX[counter];
+                            	 singlebounce[totalBricks] = true;
+                             } 
+                    		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                    			       (b[counter].getYPosition() > 185 + margin2 && b[counter].getYPosition() < 192 + margin2) &&
+                    			        singlebounce[totalBricks] == false)
+                             {
+                            	 template.removeRectangle(brick[totalBricks]);
+                            	 directionY[counter] = - directionY[counter];
+                            	 singlebounce[totalBricks] = true;
+                             }	 
+                    		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                    			       (b[counter].getYPosition() > 215 + margin2 && b[counter].getYPosition() < 222 + margin2) &&
+                    			       singlebounce[totalBricks] == false)
+                             {
+                            	 template.removeRectangle(brick[totalBricks]);
+                            	 directionY[counter] = - directionY[counter];
+                            	 singlebounce[totalBricks] = true;
+                             } 
+                         }                    	 
+                    	 margin1 = margin1 + 90;
+                    	 totalBricks = totalBricks + 1;
+                	 }                	 
+                	 margin2 = margin2 + 40;               	 
                  }
             	 
             	 
