@@ -13,15 +13,25 @@ public class BrickBreaker
         Text Title1 = new Text("B R I C K",784,70,40,"FFFFFF");
         Text Title2 = new Text("B R E A K E R",810,110,20,"FFFFFF");
         
+        Text AIM = new Text("AIM",850,180,24,"FFFFFF");
+        Text AndPress = new Text("AND PRESS",826,210,16,"FFFFFF");
+        Text SPACE = new Text("S P A C E",810,250,26,"FFFFFF");
+        
+        Text Try = new Text("TRY",850,180,22,"FFFFFF");
+        Text Again = new Text("A G A I N ?",800,220,26,"FFFFFF");
+        
         Text progress1 = new Text("!",968,578,30,"#b87333");
         Text progress2 = new Text("!",968,508,30,"#5a5b5e");
         Text progress3 = new Text("!",968,438,30,"#D4AF37");
         Text progress4 = new Text("!",968,368,30,"#dce1ea");
-        Text progress5 = new Text("!!!",960,310,25,"#dce1ea");
-        
+        Text progress5 = new Text("!!!",960,310,25,"#dce1ea");      
        
         template.addText(Title1);
         template.addText(Title2);
+        template.addText(AIM);
+        template.addText(AndPress);
+        template.addText(SPACE);
+        
         
     	Text[] t = new Text[25];
     		
@@ -179,6 +189,12 @@ public class BrickBreaker
              
              while (change == true)
              {
+            	 
+                 template.removeText(AIM);
+                 template.removeText(AndPress);
+                 template.removeText(SPACE);
+                 
+                 
                  if (aim.getStartX() > aim.getEndX())
                  {
                 	 eq1 = Math.sqrt(aim.getStartX() - aim.getEndX());
@@ -302,6 +318,20 @@ public class BrickBreaker
                     	 totalBricks = totalBricks + 1;
                 	 }                	 
                 	 margin2 = margin2 + 40;               	 
+                 }
+                 
+                 if (b[0].getYPosition() >= 720 &&
+                     b[1].getYPosition() >= 720 &&
+                	 b[2].getYPosition() >= 720 &&
+                	 b[3].getYPosition() >= 720 &&
+                	 b[4].getYPosition() >= 720 &&
+                	 b[5].getYPosition() >= 720 &&
+                	 b[6].getYPosition() >= 720 &&
+                	 b[7].getYPosition() >= 720)
+                 {
+                	 
+                     template.addText(Try);
+                     template.addText(Again);
                  }
                  
             	 
