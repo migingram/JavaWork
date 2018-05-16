@@ -12,6 +12,13 @@ public class BrickBreaker
         
         Text Title1 = new Text("B R I C K",784,70,40,"FFFFFF");
         Text Title2 = new Text("B R E A K E R",810,110,20,"FFFFFF");
+        
+        Text progress1 = new Text("!",968,578,30,"#b87333");
+        Text progress2 = new Text("!",968,508,30,"#5a5b5e");
+        Text progress3 = new Text("!",968,438,30,"#D4AF37");
+        Text progress4 = new Text("!",968,368,30,"#dce1ea");
+        Text progress5 = new Text("!!!",960,310,25,"#dce1ea");
+        
        
         template.addText(Title1);
         template.addText(Title2);
@@ -19,6 +26,9 @@ public class BrickBreaker
     	Text[] t = new Text[25];
     		
     	Arrow aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
+    	
+    	Rectangle points = new Rectangle(865,580,170,0,"b87333");
+    	template.addRectangle(points);
 
     	    
     	
@@ -111,8 +121,8 @@ public class BrickBreaker
             		 {
             			 template.addBall(b[counter]);
             		 }
-                    
-                     template.update();
+            		 
+            		 template.addText(progress1);
           	         
           	         change = true;
                  }
@@ -146,8 +156,8 @@ public class BrickBreaker
            			     template.addBall(b[counter]);
            		    } 
          	        
-                     template.update();
-          	         
+         	       template.addText(progress1);
+
           	         change = true;       
                  }
             	      	 
@@ -191,13 +201,13 @@ public class BrickBreaker
                  {
                 	 if (pause >= nextBall)
                      {                 
-                         if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 750 && b[ballTrack].getYPosition() > 0)
+                         if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 754 && b[ballTrack].getYPosition() > 0)
                          {
                         	 b[ballTrack].setXPosition(b[ballTrack].getXPosition() - (eq1 * directionX[ballTrack]) * speed);
                         	 b[ballTrack].setYPosition(b[ballTrack].getYPosition() - (eq2 * directionY[ballTrack]) * speed);
                          }
                          
-                         if (b[ballTrack].getXPosition() >= 743)
+                         if (b[ballTrack].getXPosition() >= 742)
                          {
                         	 directionX[ballTrack] = - directionX[ballTrack];
                          }
@@ -242,6 +252,10 @@ public class BrickBreaker
                              {
                             	 template.removeRectangle(brick[totalBricks]);
                             	 directionX[counter] = - directionX[counter];
+                            	 
+                            	 points.setHeight(points.getHeight() + 11.2);
+                            	 points.setYPosition(points.getYPosition() - 5.7);
+                            	 
                             	 singlebounce[totalBricks] = true;
                              }
                     		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
@@ -250,6 +264,11 @@ public class BrickBreaker
                              {
                             	 template.removeRectangle(brick[totalBricks]);
                             	 directionX[counter] = - directionX[counter];
+                            	 
+                            	 points.setHeight(points.getHeight() + 11.2);
+                            	 points.setYPosition(points.getYPosition() - 5.7);
+                            	
+                            	 
                             	 singlebounce[totalBricks] = true;
                              } 
                     		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
@@ -258,6 +277,11 @@ public class BrickBreaker
                              {
                             	 template.removeRectangle(brick[totalBricks]);
                             	 directionY[counter] = - directionY[counter];
+                            	 
+                            	 points.setHeight(points.getHeight() + 11.2);
+                            	 points.setYPosition(points.getYPosition() - 5.7);
+                            	 
+                            	 
                             	 singlebounce[totalBricks] = true;
                              }	 
                     		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
@@ -266,6 +290,11 @@ public class BrickBreaker
                              {
                             	 template.removeRectangle(brick[totalBricks]);
                             	 directionY[counter] = - directionY[counter];
+                            	 
+                            	 points.setHeight(points.getHeight() + 11.2);
+                            	 points.setYPosition(points.getYPosition() - 5.7);
+                            	
+                            	 
                             	 singlebounce[totalBricks] = true;
                              } 
                          }                    	 
@@ -274,7 +303,31 @@ public class BrickBreaker
                 	 }                	 
                 	 margin2 = margin2 + 40;               	 
                  }
+                 
             	 
+                 if (points.getHeight() >= 278)
+                 {
+                	 template.addText(progress5);
+                 }
+                 else if (points.getHeight() >= 210)
+                 {
+                	 points.setColour("#dce1ea");
+                	 template.addText(progress4);
+                 }
+                 else if (points.getHeight() >= 140)
+                 {
+                	 points.setColour("#D4AF37");
+                	 template.addText(progress3);
+                 }
+                 else if (points.getHeight() >= 70)
+                 {
+                	 points.setColour("#5a5b5e");
+                	 template.addText(progress2);
+                 }
+                 else if (points.getHeight() >= 0)
+                 {
+                	 points.setColour("#b87333");
+                 }
             	 
             	 
                  template.pause();
