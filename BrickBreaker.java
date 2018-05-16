@@ -9,12 +9,19 @@ public class BrickBreaker
         Rectangle pointsBar = new Rectangle(865,440,170,280,"#020202");
         template.addRectangle(rightColumn);
         template.addRectangle(pointsBar);
-            
+        
+        Text Title1 = new Text("B R I C K",784,70,40,"FFFFFF");
+        Text Title2 = new Text("B R E A K E R",810,110,20,"FFFFFF");
+       
+        template.addText(Title1);
+        template.addText(Title2);
+        
     	Text[] t = new Text[25];
     		
     	Arrow aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
 
     	    
+    	
         Rectangle[] brick = new Rectangle[25];
     	    
         int marginX = 0;
@@ -201,8 +208,7 @@ public class BrickBreaker
                  }
                  
              	   
-                    	 
-                 
+                        
                  pause = pause + 1;
                  
                  
