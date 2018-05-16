@@ -39,13 +39,18 @@ public class BrickBreaker
     	
     	Rectangle points = new Rectangle(865,580,170,0,"b87333");
     	template.addRectangle(points);
-
-    	    
+ 
     	
+    	
+    	
+        Text[] life = new Text[25];
+      
         Rectangle[] brick = new Rectangle[25];
     	    
         int marginX = 0;
         int marginY = 0;
+        int textmarginX = -5;
+        int textmarginY = 5;
       
         for (int counter1 = 0; counter1 < 25; counter1++)
         {
@@ -59,28 +64,41 @@ public class BrickBreaker
             {
             	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#b87333");
                 template.addRectangle(brick[counter1]);
+                
+                life[counter1] = new Text("1", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
+            	template.addText(life[counter1]);
+            	
      	    }
      	    else if ((counter1 > 4 && counter1 < 11) || (counter1 > 13 && counter1 < 20))
      	    {
      	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#5a5b5e");
                 template.addRectangle(brick[counter1]);
+                
+                life[counter1] = new Text("2", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
+            	template.addText(life[counter1]);
      	    }
      	    else if ((counter1 == 11) || (counter1 == 13))
      	    {
      	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#D4AF37");
                 template.addRectangle(brick[counter1]);
+                
+                life[counter1] = new Text("3", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
+            	template.addText(life[counter1]);
      	    }
      	    else if ((counter1 == 12))
      	    {
      	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#dce1ea");
                 template.addRectangle(brick[counter1]);
+                
+                life[counter1] = new Text("4", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
+            	template.addText(life[counter1]);
      	    }
           
             marginX = marginX + 90;
             template.update();
             
         }
-        
+               
         
         
         boolean change = false;
@@ -264,56 +282,100 @@ public class BrickBreaker
                 		 for (int counter = 0; counter < 8; counter++)
                          {
                 			    
-                    	 	 if ( (b[counter].getXPosition() > 158 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
+                    	 	 if ( (b[counter].getXPosition() > 156 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
                     			  (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
                     			   singlebounce[totalBricks] == false)
                              {
-                            	 template.removeRectangle(brick[totalBricks]);
+                            	
                             	 directionX[counter] = - directionX[counter];
+                            	                            
+                            	 int shift = Integer.parseInt(life[totalBricks].getText());
+                            	 shift = shift - 1;
                             	 
-                            	 points.setHeight(points.getHeight() + 11.2);
-                            	 points.setYPosition(points.getYPosition() - 5.7);
+                            	 String shift2 = String.valueOf(shift);                       	 
+                            	 life[totalBricks].setText(shift2);
                             	 
-                            	 singlebounce[totalBricks] = true;
+                            	 if (shift == 0)
+                            	 {
+                            		 template.removeRectangle(brick[totalBricks]);
+                            		 
+                            		 points.setHeight(points.getHeight() + 11.2);
+                                	 points.setYPosition(points.getYPosition() - 5.7);
+                                	 
+                                	 singlebounce[totalBricks] = true;
+                            	 }
+                            	 
                              }
-                    		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
+                    		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 246 + margin1) && 
                     			       (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
                     			        singlebounce[totalBricks] == false)
                              {
-                            	 template.removeRectangle(brick[totalBricks]);
+
                             	 directionX[counter] = - directionX[counter];
+                            	                                                    	                                               	 
+                            	 int shift = Integer.parseInt(life[totalBricks].getText());
+                            	 shift = shift - 1;
                             	 
-                            	 points.setHeight(points.getHeight() + 11.2);
-                            	 points.setYPosition(points.getYPosition() - 5.7);
-                            	
+                            	 String shift2 = String.valueOf(shift);                           	 
+                            	 life[totalBricks].setText(shift2);
                             	 
-                            	 singlebounce[totalBricks] = true;
+                            	 if (shift == 0)
+                            	 {
+                            		 template.removeRectangle(brick[totalBricks]);
+                            		 
+                            		 points.setHeight(points.getHeight() + 11.2);
+                                	 points.setYPosition(points.getYPosition() - 5.7);
+                                	 
+                                	 singlebounce[totalBricks] = true;
+                            	 }
+                            	 
                              } 
                     		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
-                    			       (b[counter].getYPosition() > 185 + margin2 && b[counter].getYPosition() < 192 + margin2) &&
+                    			       (b[counter].getYPosition() > 178 + margin2 && b[counter].getYPosition() < 192 + margin2) &&
                     			        singlebounce[totalBricks] == false)
                              {
-                            	 template.removeRectangle(brick[totalBricks]);
+                    			 
                             	 directionY[counter] = - directionY[counter];
+                                                    	 
+                            	 int shift = Integer.parseInt(life[totalBricks].getText());
+                            	 shift = shift - 1;
                             	 
-                            	 points.setHeight(points.getHeight() + 11.2);
-                            	 points.setYPosition(points.getYPosition() - 5.7);
+                            	 String shift2 = String.valueOf(shift);                           	 
+                            	 life[totalBricks].setText(shift2);
                             	 
+                            	 if (shift == 0)
+                            	 {
+                            		 template.removeRectangle(brick[totalBricks]);
+                            		 
+                            		 points.setHeight(points.getHeight() + 11.2);
+                                	 points.setYPosition(points.getYPosition() - 5.7);
+                                	 
+                                	 singlebounce[totalBricks] = true;
+                            	 }
                             	 
-                            	 singlebounce[totalBricks] = true;
                              }	 
                     		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
-                    			       (b[counter].getYPosition() > 215 + margin2 && b[counter].getYPosition() < 222 + margin2) &&
+                    			       (b[counter].getYPosition() > 215 + margin2 && b[counter].getYPosition() < 223 + margin2) &&
                     			       singlebounce[totalBricks] == false)
                              {
-                            	 template.removeRectangle(brick[totalBricks]);
+                    			 
                             	 directionY[counter] = - directionY[counter];
+                                                     	 
+                            	 int shift = Integer.parseInt(life[totalBricks].getText());
+                            	 shift = shift - 1;
                             	 
-                            	 points.setHeight(points.getHeight() + 11.2);
-                            	 points.setYPosition(points.getYPosition() - 5.7);
-                            	
+                            	 String shift2 = String.valueOf(shift);                        	 
+                            	 life[totalBricks].setText(shift2);
                             	 
-                            	 singlebounce[totalBricks] = true;
+                            	 if (shift == 0)
+                            	 {
+                            		 template.removeRectangle(brick[totalBricks]);
+                            		 
+                            		 points.setHeight(points.getHeight() + 11.2);
+                                	 points.setYPosition(points.getYPosition() - 5.7);
+                                	 
+                                	 singlebounce[totalBricks] = true;
+                            	 }
                              } 
                          }                    	 
                     	 margin1 = margin1 + 90;
@@ -321,6 +383,8 @@ public class BrickBreaker
                 	 }                	 
                 	 margin2 = margin2 + 40;               	 
                  }
+                 
+                 
                  
                  if (b[0].getYPosition() >= 720 &&
                      b[1].getYPosition() >= 720 &&
@@ -341,6 +405,7 @@ public class BrickBreaker
                     	 for (int counter = 0; counter < 25; counter++)
                          {
                         	 brick[counter].setYPosition(brick[counter].getYPosition() + 40);
+                        	 life[counter].setYPosition(life[counter].getYPosition() + 40);
                          }
                      }
                      
@@ -372,6 +437,7 @@ public class BrickBreaker
                  {
                 	 points.setColour("#b87333");
                  }
+                 
             	 
             	 
                  template.pause();
