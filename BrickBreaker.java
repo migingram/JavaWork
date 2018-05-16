@@ -185,212 +185,40 @@ public class BrickBreaker
                  eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
                  
                  
+                 int nextBall = 0;
                  
-                 
-                 if (b[0].getXPosition() > 0 && b[0].getXPosition() < 750 && b[0].getYPosition() > 0)
+                 for (int ballTrack = 0; ballTrack < 8; ballTrack++)
                  {
-                	 b[0].setXPosition(b[0].getXPosition() - (eq1 * directionX[0]) * speed);
-                	 b[0].setYPosition(b[0].getYPosition() - (eq2 * directionY[0]) * speed);
+                	 if (pause >= nextBall)
+                     {                 
+                         if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 750 && b[ballTrack].getYPosition() > 0)
+                         {
+                        	 b[ballTrack].setXPosition(b[ballTrack].getXPosition() - (eq1 * directionX[ballTrack]) * speed);
+                        	 b[ballTrack].setYPosition(b[ballTrack].getYPosition() - (eq2 * directionY[ballTrack]) * speed);
+                         }
+                         
+                         if (b[ballTrack].getXPosition() >= 743)
+                         {
+                        	 directionX[ballTrack] = - directionX[ballTrack];
+                         }
+                         
+                         if (b[ballTrack].getXPosition() <= 12)
+                         {
+                        	 directionX[ballTrack] = - directionX[ballTrack];
+                         }
+                         
+                         if (b[ballTrack].getYPosition() <= 12)
+                         {
+                        	 directionY[ballTrack] = - directionY[ballTrack];
+                         }
+                     }
+                	 
+                	 nextBall = nextBall + 7;
                  }
-                 
-                 if (b[0].getXPosition() >= 743)
-                 {
-                	 directionX[0] = - directionX[0];
-                 }
-                 
-                 if (b[0].getXPosition() <= 12)
-                 {
-                	 directionX[0] = - directionX[0];
-                 }
-                 if (b[0].getYPosition() <= 12)
-                 {
-                	 directionY[0] = - directionY[0];
-                 }
-                 
-             	   
-                        
+                     	                     
                  pause = pause + 1;
                  
-                 
-                 
-                 
-                 if (pause >= 7)
-                 {                 
-                     if (b[1].getXPosition() > 0 && b[1].getXPosition() < 750 && b[1].getYPosition() > 0)
-                     {
-                    	 b[1].setXPosition(b[1].getXPosition() - (eq1 * directionX[1]) * speed);
-                    	 b[1].setYPosition(b[1].getYPosition() - (eq2 * directionY[1]) * speed);
-                     }
-                     
-                     if (b[1].getXPosition() >= 743)
-                     {
-                    	 directionX[1] = - directionX[1];
-                     }
-                     
-                     if (b[1].getXPosition() <= 12)
-                     {
-                    	 directionX[1] = - directionX[1];
-                     }
-                     if (b[1].getYPosition() <= 12)
-                     {
-                    	 directionY[1] = - directionY[1];
-                     }
-                 }
-                 
-                 
-                 
-                 
-                 if (pause >= 14)
-                 {                 
-                     if (b[2].getXPosition() > 0 && b[2].getXPosition() < 750 && b[2].getYPosition() > 0)
-                     {
-                    	 b[2].setXPosition(b[2].getXPosition() - (eq1 * directionX[2]) * speed);
-                    	 b[2].setYPosition(b[2].getYPosition() - (eq2 * directionY[2]) * speed);
-                     }
-                     
-                     if (b[2].getXPosition() >= 743)
-                     {
-                    	 directionX[2] = - directionX[2];
-                     }
-                     
-                     if (b[2].getXPosition() <= 12)
-                     {
-                    	 directionX[2] = - directionX[2];
-                     }
-                     if (b[2].getYPosition() <= 12)
-                     {
-                    	 directionY[2] = - directionY[2];
-                     }  
-                 }
-                 
-                 
-                 
-                 
-                 if (pause >= 21)
-                 {                 
-                     if (b[3].getXPosition() > 0 && b[3].getXPosition() < 750 && b[3].getYPosition() > 0)
-                     {
-                    	 b[3].setXPosition(b[3].getXPosition() - (eq1 * directionX[3]) * speed);
-                    	 b[3].setYPosition(b[3].getYPosition() - (eq2 * directionY[3]) * speed);
-                     }
-                     
-                     if (b[3].getXPosition() >= 743)
-                     {
-                    	 directionX[3] = - directionX[3];
-                     }
-                     
-                     if (b[3].getXPosition() <= 12)
-                     {
-                    	 directionX[3] = - directionX[3];
-                     }
-                     
-                     if (b[3].getYPosition() <= 12)
-                     {
-                    	 directionY[3] = - directionY[3];
-                     }
-                 }
-                 
-                 
-                 
-                 
-                 if (pause >= 28)
-                 {                 
-                     if (b[4].getXPosition() > 0 && b[4].getXPosition() < 750 && b[4].getYPosition() > 0)
-                     {
-                    	 b[4].setXPosition(b[4].getXPosition() - (eq1 * directionX[4]) * speed);
-                    	 b[4].setYPosition(b[4].getYPosition() - (eq2 * directionY[4]) * speed);
-                     }
-                     
-                     if (b[4].getXPosition() >= 743)
-                     {
-                    	 directionX[4] = - directionX[4];
-                     }
-                     
-                     if (b[4].getXPosition() <= 12)
-                     {
-                    	 directionX[4] = - directionX[4];
-                     }
-                     
-                     if (b[4].getYPosition() <= 12)
-                     {
-                    	 directionY[4] = - directionY[4];
-                     } 
-                 }
-                 
-                 
-                 
-                 if (pause >= 35)
-                 {                 
-                     if (b[5].getXPosition() > 0 && b[5].getXPosition() < 750 && b[5].getYPosition() > 0)
-                     {
-                    	 b[5].setXPosition(b[5].getXPosition() - (eq1 * directionX[5]) * speed);
-                    	 b[5].setYPosition(b[5].getYPosition() - (eq2 * directionY[5]) * speed);
-                     }
-                     
-                     if (b[5].getXPosition() >= 743)
-                     {
-                    	 directionX[5] = - directionX[5];
-                     }
-                     
-                     if (b[5].getXPosition() <= 12)
-                     {
-                    	 directionX[5] = - directionX[5];
-                     }
-                     
-                     if (b[5].getYPosition() <= 12)
-                     {
-                    	 directionY[5] = - directionY[5];
-                     } 
-                 }
-                 
-                 if (pause >= 42)
-                 {                 
-                     if (b[6].getXPosition() > 0 && b[6].getXPosition() < 750 && b[6].getYPosition() > 0)
-                     {
-                    	 b[6].setXPosition(b[6].getXPosition() - (eq1 * directionX[6]) * speed);
-                    	 b[6].setYPosition(b[6].getYPosition() - (eq2 * directionY[6]) * speed);
-                     }
-                     
-                     if (b[6].getXPosition() >= 743)
-                     {
-                    	 directionX[6] = - directionX[6];
-                     }
-                     
-                     if (b[6].getXPosition() <= 12)
-                     {
-                    	 directionX[6] = - directionX[6];
-                     }
-                     
-                     if (b[6].getYPosition() <= 12)
-                     {
-                    	 directionY[6] = - directionY[6];
-                     } 
-                 }
-                 
-                 
-                 if (pause >= 49)
-                 {                 
-                     if (b[7].getXPosition() > 0 && b[7].getXPosition() < 750 && b[7].getYPosition() > 0)
-                     {
-                    	 b[7].setXPosition(b[7].getXPosition() - (eq1 * directionX[7]) * speed);
-                    	 b[7].setYPosition(b[7].getYPosition() - (eq2 * directionY[7]) * speed);
-                     }
-                     
-                     if (b[7].getXPosition() >= 743)
-                     {
-                    	 directionX[7] = - directionX[7];
-                     }
-                     
-                     if (b[7].getXPosition() <= 12)
-                     {
-                    	 directionX[7] = - directionX[7];
-                     }
-                     
-                     if (b[7].getYPosition() <= 12)
-                     {
-                    	 directionY[7] = - directionY[7];
-                     } 
-                 }
+                
                  
                  
                  int margin1 = 0;
