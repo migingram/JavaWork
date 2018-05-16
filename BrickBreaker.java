@@ -10,7 +10,8 @@ public class BrickBreaker
         template.addRectangle(rightColumn);
         template.addRectangle(pointsBar);
             
-    	    
+    	Text[] t = new Text[25];
+    		
     	Arrow aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
 
     	    
@@ -57,9 +58,9 @@ public class BrickBreaker
         
         boolean change = false;
 	    
-        Ball[] b = new Ball[5];
+        Ball[] b = new Ball[8];
         
-        for (int valcount = 0; valcount < 5; valcount++)
+        for (int valcount = 0; valcount < 8; valcount++)
         {
         	b[valcount] = new Ball(385, 560, 6, "FFFFFF");
         }
@@ -70,10 +71,10 @@ public class BrickBreaker
         double eq1 = 0;
         double eq2 = 0;
         
-        int[] directionX = new int[5];
-        int[] directionY = new int[5];
+        int[] directionX = new int[8];
+        int[] directionY = new int[8];
         
-       for (int valcount = 0; valcount < 5; valcount++)
+       for (int valcount = 0; valcount < 8; valcount++)
        {
     	   directionX[valcount] = 1;
     	   directionY[valcount] = 1;
@@ -86,6 +87,8 @@ public class BrickBreaker
     	   singlebounce[assign] = false;
        }
        
+       double speed = 2;
+       
       
         
 	    while (true)
@@ -97,7 +100,7 @@ public class BrickBreaker
                  {
             		 aim.setColour("000000");
                      
-            		 for (int counter = 0; counter < 5; counter++)
+            		 for (int counter = 0; counter < 8; counter++)
             		 {
             			 template.addBall(b[counter]);
             		 }
@@ -131,7 +134,7 @@ public class BrickBreaker
                  {
          	         aim.setColour("000000");
 
-         	        for (int counter = 0; counter < 5; counter++)
+         	        for (int counter = 0; counter < 8; counter++)
            		    {
            			     template.addBall(b[counter]);
            		    } 
@@ -177,10 +180,10 @@ public class BrickBreaker
                  
                  
                  
-                 if (b[0].getXPosition() > 6 && b[0].getXPosition() < 750 && b[0].getYPosition() > 0)
+                 if (b[0].getXPosition() > 0 && b[0].getXPosition() < 750 && b[0].getYPosition() > 0)
                  {
-                	 b[0].setXPosition(b[0].getXPosition() - (eq1 * directionX[0]));
-                	 b[0].setYPosition(b[0].getYPosition() - eq2 * directionY[0]);
+                	 b[0].setXPosition(b[0].getXPosition() - (eq1 * directionX[0]) * speed);
+                	 b[0].setYPosition(b[0].getYPosition() - (eq2 * directionY[0]) * speed);
                  }
                  
                  if (b[0].getXPosition() >= 743)
@@ -205,12 +208,12 @@ public class BrickBreaker
                  
                  
                  
-                 if (pause >= 10)
+                 if (pause >= 7)
                  {                 
-                     if (b[1].getXPosition() > 6 && b[1].getXPosition() < 750 && b[1].getYPosition() > 0)
+                     if (b[1].getXPosition() > 0 && b[1].getXPosition() < 750 && b[1].getYPosition() > 0)
                      {
-                    	 b[1].setXPosition(b[1].getXPosition() - (eq1 * directionX[1]));
-                    	 b[1].setYPosition(b[1].getYPosition() - eq2 * directionY[1]);
+                    	 b[1].setXPosition(b[1].getXPosition() - (eq1 * directionX[1]) * speed);
+                    	 b[1].setYPosition(b[1].getYPosition() - (eq2 * directionY[1]) * speed);
                      }
                      
                      if (b[1].getXPosition() >= 743)
@@ -231,12 +234,12 @@ public class BrickBreaker
                  
                  
                  
-                 if (pause >= 20)
+                 if (pause >= 14)
                  {                 
-                     if (b[2].getXPosition() > 6 && b[2].getXPosition() < 750 && b[2].getYPosition() > 0)
+                     if (b[2].getXPosition() > 0 && b[2].getXPosition() < 750 && b[2].getYPosition() > 0)
                      {
-                    	 b[2].setXPosition(b[2].getXPosition() - (eq1 * directionX[2]));
-                    	 b[2].setYPosition(b[2].getYPosition() - eq2 * directionY[2]);
+                    	 b[2].setXPosition(b[2].getXPosition() - (eq1 * directionX[2]) * speed);
+                    	 b[2].setYPosition(b[2].getYPosition() - (eq2 * directionY[2]) * speed);
                      }
                      
                      if (b[2].getXPosition() >= 743)
@@ -257,12 +260,12 @@ public class BrickBreaker
                  
                  
                  
-                 if (pause >= 30)
+                 if (pause >= 21)
                  {                 
-                     if (b[3].getXPosition() > 6 && b[3].getXPosition() < 750 && b[3].getYPosition() > 0)
+                     if (b[3].getXPosition() > 0 && b[3].getXPosition() < 750 && b[3].getYPosition() > 0)
                      {
-                    	 b[3].setXPosition(b[3].getXPosition() - (eq1 * directionX[3]));
-                    	 b[3].setYPosition(b[3].getYPosition() - eq2 * directionY[3]);
+                    	 b[3].setXPosition(b[3].getXPosition() - (eq1 * directionX[3]) * speed);
+                    	 b[3].setYPosition(b[3].getYPosition() - (eq2 * directionY[3]) * speed);
                      }
                      
                      if (b[3].getXPosition() >= 743)
@@ -284,12 +287,12 @@ public class BrickBreaker
                  
                  
                  
-                 if (pause >= 40)
+                 if (pause >= 28)
                  {                 
-                     if (b[4].getXPosition() > 6 && b[4].getXPosition() < 750 && b[4].getYPosition() > 0)
+                     if (b[4].getXPosition() > 0 && b[4].getXPosition() < 750 && b[4].getYPosition() > 0)
                      {
-                    	 b[4].setXPosition(b[4].getXPosition() - (eq1 * directionX[4]));
-                    	 b[4].setYPosition(b[4].getYPosition() - eq2 * directionY[4]);
+                    	 b[4].setXPosition(b[4].getXPosition() - (eq1 * directionX[4]) * speed);
+                    	 b[4].setYPosition(b[4].getYPosition() - (eq2 * directionY[4]) * speed);
                      }
                      
                      if (b[4].getXPosition() >= 743)
@@ -309,6 +312,81 @@ public class BrickBreaker
                  }
                  
                  
+                 
+                 if (pause >= 35)
+                 {                 
+                     if (b[5].getXPosition() > 0 && b[5].getXPosition() < 750 && b[5].getYPosition() > 0)
+                     {
+                    	 b[5].setXPosition(b[5].getXPosition() - (eq1 * directionX[5]) * speed);
+                    	 b[5].setYPosition(b[5].getYPosition() - (eq2 * directionY[5]) * speed);
+                     }
+                     
+                     if (b[5].getXPosition() >= 743)
+                     {
+                    	 directionX[5] = - directionX[5];
+                     }
+                     
+                     if (b[5].getXPosition() <= 12)
+                     {
+                    	 directionX[5] = - directionX[5];
+                     }
+                     
+                     if (b[5].getYPosition() <= 12)
+                     {
+                    	 directionY[5] = - directionY[5];
+                     } 
+                 }
+                 
+                 if (pause >= 42)
+                 {                 
+                     if (b[6].getXPosition() > 0 && b[6].getXPosition() < 750 && b[6].getYPosition() > 0)
+                     {
+                    	 b[6].setXPosition(b[6].getXPosition() - (eq1 * directionX[6]) * speed);
+                    	 b[6].setYPosition(b[6].getYPosition() - (eq2 * directionY[6]) * speed);
+                     }
+                     
+                     if (b[6].getXPosition() >= 743)
+                     {
+                    	 directionX[6] = - directionX[6];
+                     }
+                     
+                     if (b[6].getXPosition() <= 12)
+                     {
+                    	 directionX[6] = - directionX[6];
+                     }
+                     
+                     if (b[6].getYPosition() <= 12)
+                     {
+                    	 directionY[6] = - directionY[6];
+                     } 
+                 }
+                 
+                 
+                 if (pause >= 49)
+                 {                 
+                     if (b[7].getXPosition() > 0 && b[7].getXPosition() < 750 && b[7].getYPosition() > 0)
+                     {
+                    	 b[7].setXPosition(b[7].getXPosition() - (eq1 * directionX[7]) * speed);
+                    	 b[7].setYPosition(b[7].getYPosition() - (eq2 * directionY[7]) * speed);
+                     }
+                     
+                     if (b[7].getXPosition() >= 743)
+                     {
+                    	 directionX[7] = - directionX[7];
+                     }
+                     
+                     if (b[7].getXPosition() <= 12)
+                     {
+                    	 directionX[7] = - directionX[7];
+                     }
+                     
+                     if (b[7].getYPosition() <= 12)
+                     {
+                    	 directionY[7] = - directionY[7];
+                     } 
+                 }
+                 
+                 
                  int margin1 = 0;
                  int margin2 = 0;
                  
@@ -321,7 +399,7 @@ public class BrickBreaker
                 	 
                 	 for (int brickCount2 = 0; brickCount2 < 5; brickCount2++)
                 	 {
-                		 for (int counter = 0; counter < 5; counter++)
+                		 for (int counter = 0; counter < 8; counter++)
                          {
                 			    
                     	 	 if ( (b[counter].getXPosition() > 158 + margin1 && b[counter].getXPosition() < 165 + margin1) && 
