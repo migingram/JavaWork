@@ -3,24 +3,30 @@ public class BrickBreaker
     public static void main(String[] args)
     {   
     	
-    	GameArena template = new GameArena(1000,600); // Creates window of specified dimensions
+    	GameArena template = new GameArena(1000,600);  // Creates window of specified dimensions
     	
-    	Rectangle menu = new Rectangle(500,300,1000,600,"202C4F");
-    	Rectangle level1 = new Rectangle(150,300,80,80,"#478687");
-    	Rectangle level1border = new Rectangle(150,300,85,85,"#000000");
     	
-    	Rectangle level2 = new Rectangle(350,300,80,80,"#478687");
-    	Rectangle level2border = new Rectangle(350,300,85,85,"#000000");
+    	// Create menu UI through calling classes 
+    
+    	Rectangle menu = new Rectangle(500,300,1000,600,"202C4F"); 
+    	Rectangle level1 = new Rectangle(150,300,80,80,"#478687");  
+    	Rectangle level1border = new Rectangle(150,300,85,85,"#000000");  
     	
-    	Text brickTitleMenu = new Text("B R I C K",350,80,70,"FFFFFF");
-    	Text breakerTitleMenu = new Text("B R E A K E R",275,165,70,"FFFFFF");
+    	Rectangle level2 = new Rectangle(350,300,80,80,"#478687");  
+    	Rectangle level2border = new Rectangle(350,300,85,85,"#000000"); 
     	
-    	Text brickTitleMenuBorder = new Text("B R I C K",358,80,70,"000000");
-    	Text breakerTitleMenuBorder = new Text("B R E A K E R",282,165,70,"000000");
+    	Text brickTitleMenu = new Text("B R I C K",350,80,70,"FFFFFF");  
+    	Text breakerTitleMenu = new Text("B R E A K E R",275,165,70,"FFFFFF");  
+    	
+    	Text brickTitleMenuBorder = new Text("B R I C K",358,80,70,"000000");  
+    	Text breakerTitleMenuBorder = new Text("B R E A K E R",282,165,70,"000000"); 
     	
         Text level1Text = new Text("I",142,315,40,"000000");
         Text level2Text = new Text("II",334,315,40,"000000");
     	
+        
+        // Display menu UI
+        
     	template.addRectangle(menu);
     	template.addRectangle(level1border);
     	template.addRectangle(level1);
@@ -39,23 +45,28 @@ public class BrickBreaker
     	template.update();
     	
     	
+    	// "While" loop to check for which level selected
+    	
     	while (true)
     	{
-    		if(template.leftPressed())
-    		{
+    		if(template.leftPressed())          // If left pressed, set Level 1 colour to orange "Selected"
+    		{                                   // and deselect Level 2 by making colour blue again
     			level2.setColour("#478687");
     			level1.setColour("#ea6c0b");
     		}
     		
-    		if (template.rightPressed())
-    		{
-    			level2.setColour("#ea6c0b");
+    		if (template.rightPressed())        // If right pressed, vice-versa 
+    		{                                   // (Level 2 greyed out)
+    			level2.setColour("#5d5e60");
     			level1.setColour("#478687");
     		}
     		
-    		if(template.spacePressed() && level1.getColour() == "#ea6c0b")
-    		{
-    	    	template.removeRectangle(menu);
+    		if(template.spacePressed() && level1.getColour() == "#ea6c0b")    // If space is pressed when 
+    		{           													  // when Level 1 is selected
+    						
+    			// Remove menu UI
+    			
+    	    	template.removeRectangle(menu); 							  
     	    	template.removeRectangle(level1border);
     	    	template.removeRectangle(level1);
     	    	template.removeRectangle(level2border);
@@ -69,6 +80,9 @@ public class BrickBreaker
     	    	
     	    	template.removeText(level1Text);
     	    	template.removeText(level2Text);
+    	    	
+    	    	
+    	    	// Create Level 1 UI 
     	    	
     	    	Rectangle rightColumn = new Rectangle(880,500,250,1000,"#202C4F"); 
     	        Rectangle pointsBar = new Rectangle(865,440,170,280,"#020202");
@@ -94,43 +108,48 @@ public class BrickBreaker
     	        Text progress2 = new Text("!",968,508,30,"#5a5b5e");
     	        Text progress3 = new Text("!",968,438,30,"#D4AF37");
     	        Text progress4 = new Text("!",968,368,30,"#dce1ea");
-    	        Text progress5 = new Text("!!!",960,310,25,"#dce1ea");      
+    	        Text progress5 = new Text("!!!",960,310,25,"#dce1ea");  
+    	        
+    	    	Arrow aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
+    	    	
+    	    	Rectangle points = new Rectangle(865,580,170,0,"b87333");
     	       
+ 
+    	        // Display Level 1 UI
+    	        
     	        template.addText(Title1);
     	        template.addText(Title2);
     	        template.addText(AIM);
     	        template.addText(AndPress);
-    	        template.addText(SPACE);
-    	        
-    	        
-
-    	    		
-    	    	Arrow aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
-    	    	
-    	    	Rectangle points = new Rectangle(865,580,170,0,"b87333");
+    	        template.addText(SPACE);   	           	     
     	    	template.addRectangle(points);
 
     	    	
     	    	
-    	    	
-    	        Text[] life = new Text[25];
-    	      
+    	    	// Create and display the bricks and text (life of brick) that comes with it
+    	    	    	    	
+    	        Text[] life = new Text[25];               // Array of text to go with 
+    	                                                  // same size array of bricks
     	        Rectangle[] brick = new Rectangle[25];
     	    	    
     	        int marginX = 0;
     	        int marginY = 0;
-    	        int textmarginX = -5;
+    	        int textmarginX = -5;     // Adjusting text on x and y axis
     	        int textmarginY = 5;
     	      
-    	        for (int counter1 = 0; counter1 < 25; counter1++)
+    	        
+    	        for (int counter1 = 0; counter1 < 25; counter1++)         // Assign a brick and number value to every slot in array
     	        {
-    	     	    if (counter1 == 5 || counter1 == 10 || counter1 == 15 || counter1 == 20)
-    	     	    {
+    	     	    if (counter1 == 5 || counter1 == 10 || counter1 == 15 || counter1 == 20)   // Looks out to create new row 
+    	     	    { 																		   // after 5 bricks
     	                marginX = 0;
     	                marginY = marginY + 40;
     	            }
     	     	 
-    	            if ((counter1 >= 0 && counter1 < 5) || (counter1 > 19 && counter1 < 25))
+    	     	    
+    	     	   // Creates bronze bricks of life 1
+    	     	    
+    	            if ((counter1 >= 0 && counter1 < 5) || (counter1 > 19 && counter1 < 25))  
     	            {
     	            	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#b87333");
     	                template.addRectangle(brick[counter1]);
@@ -139,39 +158,55 @@ public class BrickBreaker
     	            	template.addText(life[counter1]);
     	            	
     	     	    }
-    	     	    else if ((counter1 > 4 && counter1 < 11) || (counter1 > 13 && counter1 < 20))
+    	            
+    	            
+    	            // Creates silver bricks of life 3  
+    	            
+    	     	    else if ((counter1 > 4 && counter1 < 11) || (counter1 > 13 && counter1 < 20))       
     	     	    {
     	     	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#5a5b5e");
-    	                template.addRectangle(brick[counter1]);
-    	                
-    	                life[counter1] = new Text("2", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
-    	            	template.addText(life[counter1]);
-    	     	    }
-    	     	    else if ((counter1 == 11) || (counter1 == 13))
-    	     	    {
-    	     	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#D4AF37");
     	                template.addRectangle(brick[counter1]);
     	                
     	                life[counter1] = new Text("3", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
     	            	template.addText(life[counter1]);
     	     	    }
+    	            
+    	            
+    	            // Creates gold bricks of life 5
+    	            
+    	     	    else if ((counter1 == 11) || (counter1 == 13))                                 
+    	     	    {
+    	     	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#D4AF37");
+    	                template.addRectangle(brick[counter1]);
+    	                
+    	                life[counter1] = new Text("5", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
+    	            	template.addText(life[counter1]);
+    	     	    }
+    	            
+    	              	            
+    	            // Creates single platinum brick of life 7
+    	            
     	     	    else if ((counter1 == 12))
     	     	    {
     	     	    	brick[counter1] = new Rectangle(200 + marginX, 200 + marginY, 80, 30, "#dce1ea");
     	                template.addRectangle(brick[counter1]);
     	                
-    	                life[counter1] = new Text("4", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
+    	                life[counter1] = new Text("7", 200 + marginX + textmarginX, 200 + marginY + textmarginY, 15, "000000");
     	            	template.addText(life[counter1]);
     	     	    }
     	          
-    	            marginX = marginX + 90;
+    	            marginX = marginX + 90;     // Move along x axis to next column
     	            template.update();
     	            
     	        }
     	               
     	        
     	        
-    	        boolean change = false;
+    	        boolean change = false;     // Allows for entrance into next "while" loop when space has been 
+    	         							// pressed to shoot the balls
+    	        
+    	        
+    	        // Create balls and assign them size, colour and location
     	        
     	        Ball[] b = new Ball[8];
     	        
@@ -181,43 +216,55 @@ public class BrickBreaker
     	        }
     	        
     	        
-    	        int pause = 0;
+    	        int pause = 0;      // Creates spacing between the balls 
     	        
-    	        double eq1 = 0;
-    	        double eq2 = 0;
+    	        double eq1 = 0;     // X axis movement of the balls
+    	        double eq2 = 0;     // Y axis movement of the balls
+    	        
+    	        
+    	        // Creates X and Y movement directions for each ball
+    	        // to allow independent movement
     	        
     	        int[] directionX = new int[8];
     	        int[] directionY = new int[8];
     	        
-    	       for (int valcount = 0; valcount < 8; valcount++)
-    	       {
-    	    	   directionX[valcount] = 1;
-    	    	   directionY[valcount] = 1;
-    	       }
+    	        for (int valcount = 0; valcount < 8; valcount++)
+    	        {
+    	    	    directionX[valcount] = 1;
+    	    	    directionY[valcount] = 1;
+    	        }
+    	        
+    	        
+    	        // A boolean variable to validate whether a brick has been hit or not
     	       
-    	       boolean[] singlebounce = new boolean[25];
+    	        boolean[] singlebounce = new boolean[25];
     	       
-    	       for (int assign = 0; assign < 25; assign++)
-    	       {
-    	    	   singlebounce[assign] = false;
-    	       }
+    	        for (int assign = 0; assign < 25; assign++)
+    	        {
+    	     	   singlebounce[assign] = false;
+    	        }
+    	        
+    	        
     	       
-    	       double speed = 2;
-    	       
-    	       int set1 = 0;
-    	       int set2 = 0;
+    	        double speed = 2;    // To adjust the speed of the balls
+    	          	        
+    	        int set1 = 0;        // Resets brick margins when checking for 
+    	        int set2 = 0;        // ball impacting bricks
     	       
 
     	      
     	    	    while (true)
     	            {   
     	    	    	  
-    	                 while ((aim.getStartX() <= aim.getEndX()) && (change == false))
-    	                 {
+    	    	    	// While the arrow is pointing straight or to the right
+    	    	    	
+    	                 while ((aim.getStartX() <= aim.getEndX()) && (change == false))     
+    	                 {																	
     	                	 
-    	                	 if (template.spacePressed())
-    	                     {
-    	                		 aim.setColour("000000");
+    	                	 
+    	                	 if (template.spacePressed())                            // If space is pressed, make the 
+    	                     {														 // arrow invisible and add the balls
+    	                		 aim.setColour("000000");                    
     	                         
     	                		 for (int counter = 0; counter < 8; counter++)
     	                		 {
@@ -226,50 +273,56 @@ public class BrickBreaker
     	                		 
     	                		 template.addText(progress1);
     	              	         
-    	              	         change = true;
+    	              	         change = true;                                      // Moves onto next "while" loop
     	                     }
+ 
     	                	 
     	                	 
-    	                	 if (template.leftPressed() )
-    	            	     {
+    	                	 if (template.leftPressed() )                               // If left is pressed, adjust the
+    	            	     { 															// arrow to point leftwards
     	            		     aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() - 1);
     	            	     }
     	                	 
-    	                	 if ((aim.getEndY() < 578) && (template.rightPressed()))
-    	                	 {
-    	            		     aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() + 1);
+    	                	 
+    	                	 if ((aim.getEndY() < 578) && (template.rightPressed()))    // If right is pressed and doesn't exceed
+    	                	 {															// movement cap, move the arrow point rightwards
+    	            		     aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() + 1); 
     	                	 }
     	                
     	                       template.update();
     	                 }
     	                 
 
+    	                 
+    	                 // While the arrow is pointing to the left
+    	                 
     	                 while ((aim.getStartX() > aim.getEndX()) && (change == false))
     	                 {     
     	                	 
     	                	 
-    	                	 if (template.spacePressed())
-    	                     {
+    	                	 if (template.spacePressed())                             // If space is pressed, make the
+    	                     {														  // arrow invisible and add the balls
     	             	         aim.setColour("000000");
 
-    	             	        for (int counter = 0; counter < 8; counter++)
+    	             	        for (int counter = 0; counter < 8; counter++)  
     	               		    {
     	               			     template.addBall(b[counter]);
     	               		    } 
     	             	        
     	             	       template.addText(progress1);
 
-    	              	         change = true;       
+    	              	         change = true;       								// Moves onto next "while" loop
     	                     }
     	                	      	 
     	                	 
-    	            	       if (template.rightPressed())
-    	            	       {
+    	            	       if (template.rightPressed())                               // If right is pressed, adjust the
+    	            	       {          												  // arrow to point rightwards
     	            		       aim.setEnd(aim.getEndX() + 1.2, aim.getEndY() - 1);
     	            	       }
+    	            	       
     	            	           
-    	            	       if ((aim.getEndY() < 578) && (template.leftPressed()))
-    	                       {
+    	            	       if ((aim.getEndY() < 578) && (template.leftPressed()))     // If left is pressed and doesn't exceed
+    	                       {														  // movement cap, the arrow points leftwards
     	            	           aim.setEnd(aim.getEndX() - 1.2, aim.getEndY() + 1);
     	            	       }
 
@@ -277,64 +330,88 @@ public class BrickBreaker
     	                 }
     	                 
     	                 
+    	                 
+    	                 // "While" loop to shoot and direct the balls
+    	                 
     	                 while (change == true)
     	                 {
+    	                	 
+    	                	 
+    	                	 // Remove AIM text
     	                	 
     	                     template.removeText(AIM);
     	                     template.removeText(AndPress);
     	                     template.removeText(SPACE);
     	                     
+    	                        	      
     	                     
-    	                     if (aim.getStartX() > aim.getEndX())
+    	                     // Determines which direction the balls should move based on
+    	                     // whether the arrow is pointing left or right based on Pythagoras' theorem
+    	                 
+    	                     
+    	                     if (aim.getStartX() > aim.getEndX())     // If arrow is pointing left
     	                     {
     	                    	 eq1 = Math.sqrt(aim.getStartX() - aim.getEndX());
     	                     }
-    	                     else if (aim.getStartX() < aim.getEndX())
+    	                     else if (aim.getStartX() < aim.getEndX())      // If arrow is pointing right
     	                     {
-    	                    	 eq1 =  - (Math.sqrt(aim.getEndX() - aim.getStartX()));
+    	                    	 eq1 =  - (Math.sqrt(aim.getEndX() - aim.getStartX()));    
     	                     }
-    	                     else 
-    	                     {
+    	                     else                                      // If arrow is pointing straight
+    	                     { 										   // set x movement to 0
     	                    	 eq1 = 0;
     	                     }
     	                     
     	                     eq2 = Math.sqrt(aim.getStartY() - aim.getEndY());
+    	                     
+
     	                     
     	                     
     	                     int nextBall = 0;
     	                     
     	                     for (int ballTrack = 0; ballTrack < 8; ballTrack++)
     	                     {
-    	                    	 if (pause >= nextBall)
-    	                         {                 
+    	                    	 if (pause >= nextBall)      // Shoots the next balls
+    	                         {   
+    	                    		 
+    	                    		 
+    	                    		 // If ball within the boundaries of the walls, move the ball by eq1 (x cord) and eq2 (y cord)
+    	                    		 
     	                             if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 754 && b[ballTrack].getYPosition() > 0)
     	                             {
     	                            	 b[ballTrack].setXPosition(b[ballTrack].getXPosition() - (eq1 * directionX[ballTrack]) * speed);
     	                            	 b[ballTrack].setYPosition(b[ballTrack].getYPosition() - (eq2 * directionY[ballTrack]) * speed);
     	                             }
     	                             
-    	                             if (b[ballTrack].getXPosition() >= 742)
+    	                             
+    	                             
+    	                             
+    	                             if (b[ballTrack].getXPosition() >= 742)                  // If ball hits the right wall 
     	                             {
-    	                            	 directionX[ballTrack] = - directionX[ballTrack];
+    	                            	 directionX[ballTrack] = - directionX[ballTrack];     // multiply the x movement by -1
     	                             }
     	                             
-    	                             if (b[ballTrack].getXPosition() <= 12)
-    	                             {
-    	                            	 directionX[ballTrack] = - directionX[ballTrack];
-    	                             }
+    	                             if (b[ballTrack].getXPosition() <= 12)                   // If ball hits the left wall
+    	                             {  
+    	                            	 directionX[ballTrack] = - directionX[ballTrack];     // multiply the x movement by -1
+    	                             } 
     	                             
-    	                             if (b[ballTrack].getYPosition() <= 12)
+    	                             if (b[ballTrack].getYPosition() <= 12)                   // If ball hits the top wall
     	                             {
-    	                            	 directionY[ballTrack] = - directionY[ballTrack];
+    	                            	 directionY[ballTrack] = - directionY[ballTrack];     // multiply the y movement by -1
     	                             }
     	                         }
     	                    	 
-    	                    	 nextBall = nextBall + 7;
+    	                    	 nextBall = nextBall + 7;    // Allows for space between ball just release and the next one
     	                     }
     	                         	                     
-    	                     pause = pause + 1;
+    	                     pause = pause + 1;       // Incrementing look-out value to create space between balls
     	                     
-    	                    
+ 
+    	                     
+    	                     
+   
+    	                     // Reduce the life number of bricks hit, and remove if depleted to 0
     	                     
     	                     int margin1 = set1;
     	                     int margin2 = set2;                    
@@ -344,25 +421,35 @@ public class BrickBreaker
     	                     
     	                     for (int brickCount = 0; brickCount < 5; brickCount++)
     	                     {
-    	                    	 margin1 = 0;
+    	                    	 margin1 = 0;       // Reset to column 1
     	                    	 
     	                    	 for (int brickCount2 = 0; brickCount2 < 5; brickCount2++)
     	                    	 {
-    	                    		 for (int counter = 0; counter < 8; counter++)
+    	                    		 
+    	                    		 for (int counter = 0; counter < 8; counter++)     // Check every ball for impact on brick
     	                             {
-    	                    			    
-    	                        	 	 if ( (b[counter].getXPosition() > 155 + margin1 && b[counter].getXPosition() < 166 + margin1) && 
+    	                    			 
+    	                    			 
+    	                    			 
+    	                    			 // If the left side of the brick is hit
+    	                    			 
+    	                        	 	 if ( (b[counter].getXPosition() > 155 + margin1 && b[counter].getXPosition() < 166 + margin1) &&       
     	                        			  (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
     	                        			   singlebounce[totalBricks] == false)
     	                                 {
     	                                	
-    	                                	 directionX[counter] = - directionX[counter];
-    	                                	                            
-    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
-    	                                	 shift = shift - 1;
+    	                                	 directionX[counter] = - directionX[counter];     // Change X direction of ball 
     	                                	 
+    	                                	 
+    	                                	 // Gets string life value of brick, converts to integer, decrements it, and returns it to string
+    	                                	 
+    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+    	                                	 shift = shift - 1;    	                                	 
     	                                	 String shift2 = String.valueOf(shift);                       	 
     	                                	 life[totalBricks].setText(shift2);
+    	                                	 
+    	                                	 
+    	                                	 // If life is reduced to 0, remove brick and increase points bar
     	                                	 
     	                                	 if (shift == 0)
     	                                	 {
@@ -371,22 +458,32 @@ public class BrickBreaker
     	                                		 points.setHeight(points.getHeight() + 11.2);
     	                                    	 points.setYPosition(points.getYPosition() - 5.6);
     	                                    	 
-    	                                    	 singlebounce[totalBricks] = true;
+    	                                    	 singlebounce[totalBricks] = true;     // Brick[totalBricks] has been hit
     	                                	 }
     	                                	 
     	                                 }
+    	                        	 	 
+    	                        	 	 
+    	                        	 	 
+    	                        	 	 // If the right side of the brick is hit
+    	                        	 	 
     	                        		 else if ( (b[counter].getXPosition() > 230 + margin1 && b[counter].getXPosition() < 246 + margin1) && 
     	                        			       (b[counter].getYPosition() > 190 + margin2 && b[counter].getYPosition() < 220 + margin2) &&
     	                        			        singlebounce[totalBricks] == false)
     	                                 {
 
-    	                                	 directionX[counter] = - directionX[counter];
-    	                                	                                                    	                                               	 
-    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
-    	                                	 shift = shift - 1;
+    	                                	 directionX[counter] = - directionX[counter];     // Change X direction of ball 
+    	                                	  
     	                                	 
+    	                                	 // Gets string life value of brick, converts to integer, decrements it, and returns it to string
+    	                                	 
+    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+    	                                	 shift = shift - 1;    	                                	 
     	                                	 String shift2 = String.valueOf(shift);                           	 
     	                                	 life[totalBricks].setText(shift2);
+    	                                	 
+    	                                	 
+    	                                	 // If life is reduced to 0, remove brick and increase points bar
     	                                	 
     	                                	 if (shift == 0)
     	                                	 {
@@ -395,22 +492,32 @@ public class BrickBreaker
     	                                		 points.setHeight(points.getHeight() + 11.2);
     	                                    	 points.setYPosition(points.getYPosition() - 5.6);
     	                                    	 
-    	                                    	 singlebounce[totalBricks] = true;
+    	                                    	 singlebounce[totalBricks] = true;     // Brick[totalBricks] has been hit
     	                                	 }
     	                                	 
     	                                 } 
+    	                        	 	 
+    	                        	 	 
+    	                        	 	 
+    	                        	 	 // If the top of the brick is hit
+    	                        	 	 
     	                        		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
     	                        			       (b[counter].getYPosition() > 178 + margin2 && b[counter].getYPosition() < 192 + margin2) &&
     	                        			        singlebounce[totalBricks] == false)
     	                                 {
     	                        			 
-    	                                	 directionY[counter] = - directionY[counter];
-    	                                                        	 
-    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
-    	                                	 shift = shift - 1;
+    	                                	 directionY[counter] = - directionY[counter];     // Change Y direction of ball 
+    	                                      
     	                                	 
+    	                                	 // Gets string life value of brick, converts to integer, decrements it, and returns it to string
+    	                                	 
+    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+    	                                	 shift = shift - 1;    	                                	 
     	                                	 String shift2 = String.valueOf(shift);                           	 
     	                                	 life[totalBricks].setText(shift2);
+    	                                	 
+    	                                	 
+    	                                	 // If life is reduced to 0, remove brick and increase points bar
     	                                	 
     	                                	 if (shift == 0)
     	                                	 {
@@ -419,23 +526,33 @@ public class BrickBreaker
     	                                		 points.setHeight(points.getHeight() + 11.2);
     	                                    	 points.setYPosition(points.getYPosition() - 5.6);
     	                                    	 
-    	                                    	 singlebounce[totalBricks] = true;
+    	                                    	 singlebounce[totalBricks] = true;     // Brick[totalBricks] has been hit
     	                                	 }
     	                                	 
     	                                 }	 
+    	                        	 	 
+    	                        	 	 
+    	                        	 	 
+    	                        	 	 // If the bottom of the brick is hit
+    	                        	 	 
     	                        		 else if ( (b[counter].getXPosition() > 160 + margin1 && b[counter].getXPosition() < 240 + margin1) && 
     	                        			       (b[counter].getYPosition() > 215 + margin2 && b[counter].getYPosition() < 225 + margin2) &&
     	                        			       singlebounce[totalBricks] == false)
     	                                 {
     	                        			 
-    	                                	 directionY[counter] = - directionY[counter];
-    	                                                         	 
-    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
-    	                                	 shift = shift - 1;
+    	                                	 directionY[counter] = - directionY[counter];     // Change X direction of ball 
+    	                                     
     	                                	 
+    	                                	 // Gets string life value of brick, converts to integer, decrements it, and returns it to string
+    	                                	 
+    	                                	 int shift = Integer.parseInt(life[totalBricks].getText());
+    	                                	 shift = shift - 1;    	                                	 
     	                                	 String shift2 = String.valueOf(shift);                        	 
     	                                	 life[totalBricks].setText(shift2);
     	                                	 
+    	                                	 
+    	                                	 // If life is reduced to 0, remove brick and increase points bar
+    	                                	  
     	                                	 if (shift == 0)
     	                                	 {
     	                                		 template.removeRectangle(brick[totalBricks]);
@@ -443,19 +560,21 @@ public class BrickBreaker
     	                                		 points.setHeight(points.getHeight() + 11.2);
     	                                    	 points.setYPosition(points.getYPosition() - 5.6);
     	                                    	 
-    	                                    	 singlebounce[totalBricks] = true;
+    	                                    	 singlebounce[totalBricks] = true;     // Brick[totalBricks] has been hit
     	                                	 }
-    	                                 } 
+    	                                 }     	                        	 	     	                        	 	     	                        	 	     	                        	 	 
     	                             }    
     	                    		 
-    	                        	 margin1 = margin1 + 90;
-    	                        	 totalBricks = totalBricks + 1;
+    	                        	 margin1 = margin1 + 90;             // Go to brick in next column
+    	                        	 totalBricks = totalBricks + 1;      // Next brick in array
     	                    	 }   
     	                    	 
-    	                    	 margin2 = margin2 + 40;               	 
+    	                    	 margin2 = margin2 + 40;                 // Go to brick in next row      	 
     	                     }
     	                     
     	                     
+    	                     
+    	                     // Changes colour and shows "!" of progress, as more bricks are destroyed
     	                     
     	                     if (points.getHeight() >= 278)
     	                     {
@@ -483,6 +602,8 @@ public class BrickBreaker
     	                     
     	                     
     	                     
+    	                     // Checks if any bricks left, if so, proceeds to next round
+    	                     
     	                     if (b[0].getYPosition() >= 720 &&
     	                         b[1].getYPosition() >= 720 &&
     	                    	 b[2].getYPosition() >= 720 &&
@@ -497,6 +618,8 @@ public class BrickBreaker
     	                        	 for (int counter = 0; counter < 25; counter++)
     	                             {    
     	                     	         
+    	                        		 // If brick that hasn't been hit reaches the bottom, end game
+    	                        		 
     	                        		 if (brick[counter].getYPosition() >= 520 && singlebounce[counter] == false)
     	                     	         {
     	                     		 
@@ -510,13 +633,20 @@ public class BrickBreaker
     	                     	             while (true)
     	                     	             { }
     	                     	         }
+    	                        		    	                        		 
     	                        		 
-    	                        		  brick[counter].setYPosition(brick[counter].getYPosition() + 40);
+    	                        		 // Drops the remaining bricks down a row
+    	                        		 
+    	                        		  brick[counter].setYPosition(brick[counter].getYPosition() + 40); 
     	                            	  life[counter].setYPosition(life[counter].getYPosition() + 40); 
     	                            	  
     	                            
     	                             }
     	                        	 
+    	                        	 
+    	                        	 // Re-displays the arrow, resets the balls, and sets
+    	                        	 // required values back to 0
+    	                        	
 
     	                        	 aim = new Arrow(380,580,380,550,2,"#FFFFFF",template);
     	                        	 
@@ -538,14 +668,17 @@ public class BrickBreaker
 
 
     	                            set1 = 0;
-    	                            set2 = set2 + 40;
-    	                            
+    	                            set2 = set2 + 40;   // Everything has been reset the same as the first round   	                            
+    	                            					// except for the bricks having dropped a row
     	                             
-    	                        	change = false;
+    	                        	change = false;      // Exits current "while" loop and enters arrow "while" loop
     	                         
     	                     }
     	                     
     	                     
+    	                     
+    	                     // Checks for a win. If all the balls are out of the game
+    	                     // and points are at max, then display "Winner"
     	                     
     	                     if (b[0].getYPosition() >= 720 &&
     	                             b[1].getYPosition() >= 720 &&
@@ -564,8 +697,6 @@ public class BrickBreaker
     	                     template.update();
     	                 }       
     	            }
-
-
     		}
     		
     	  	template.update();
