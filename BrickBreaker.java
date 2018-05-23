@@ -1203,7 +1203,7 @@ public class BrickBreaker
     	                    		 
     	                    		 // If ball within the boundaries of the walls, move the ball by eq1 (x cord) and eq2 (y cord)
     	                    		 
-    	                             if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 754 && b[ballTrack].getYPosition() > 0)
+    	                             if (b[ballTrack].getXPosition() > 0 && b[ballTrack].getXPosition() < 754 && b[ballTrack].getYPosition() > -2)
     	                             {
     	                            	 b[ballTrack].setXPosition(b[ballTrack].getXPosition() - (eq1 * directionX[ballTrack]) * speed);
     	                            	 b[ballTrack].setYPosition(b[ballTrack].getYPosition() - (eq2 * directionY[ballTrack]) * speed);
@@ -1221,7 +1221,7 @@ public class BrickBreaker
     	                            	 directionX[ballTrack] = - directionX[ballTrack];     // multiply the x movement by -1
     	                             } 
     	                             
-    	                             if (b[ballTrack].getYPosition() <= 12)                   // If ball hits the top wall
+    	                             if (b[ballTrack].getYPosition() <= 14)                   // If ball hits the top wall
     	                             {
     	                            	 directionY[ballTrack] = - directionY[ballTrack];     // multiply the y movement by -1
     	                             }
@@ -1468,13 +1468,68 @@ public class BrickBreaker
 	                        		 
 	                        		 // Drops the remaining bricks down a row
 	                        		 
-	                        		  brick[counter].setYPosition(brick[counter].getYPosition() + 34); 
-	                            	  life[counter].setYPosition(life[counter].getYPosition() + 34); 
+	                        		  brick[counter].setYPosition(brick[counter].getYPosition() + 28); 
+	                            	  life[counter].setYPosition(life[counter].getYPosition() + 28); 
 	                            	  
 	                            
 	                             }
 	                        	 
+	                        	  brick[9].setYPosition(brick[9].getYPosition() + 28); 
+	                        	  brick[17].setYPosition(brick[17].getYPosition() + 28); 
+	                        	  brick[18].setYPosition(brick[18].getYPosition() + 28); 
+	                        	  brick[26].setYPosition(brick[26].getYPosition() + 28); 
+	                        	  brick[27].setYPosition(brick[27].getYPosition() + 28); 
+	                        	  
+	                        	  for (int counter = 29; counter < 34; counter++)
+	                        	  {
+	                        		  brick[counter].setYPosition(brick[counter].getYPosition() + 28); 	                        		  
+	                        	  }
+	                        	  
+	                        	  brick[35].setYPosition(brick[35].getYPosition() + 28); 
+	                        	  brick[36].setYPosition(brick[36].getYPosition() + 28); 
+	                        	  
+	                        	  for (int counter = 38; counter < 43; counter++)
+	                        	  {
+	                        		  brick[counter].setYPosition(brick[counter].getYPosition() + 28); 	                        		  
+	                        	  }
+	                        	  
+	                        	  brick[44].setYPosition(brick[44].getYPosition() + 28); 
+	                        	  brick[45].setYPosition(brick[45].getYPosition() + 28); 
+	                        	  brick[53].setYPosition(brick[53].getYPosition() + 28); 	                        	  
+                      		      brick[54].setYPosition(brick[54].getYPosition() + 28); 
+                   		          brick[62].setYPosition(brick[62].getYPosition() + 28); 
+	                        	 
+                   		          
+                   		          
+                   		          life[9].setYPosition(life[9].getYPosition() + 28); 
+                   		          life[17].setYPosition(life[17].getYPosition() + 28); 
+	                        	  life[18].setYPosition(life[18].getYPosition() + 28); 
+	                        	  life[26].setYPosition(life[26].getYPosition() + 28); 
+	                        	  life[27].setYPosition(life[27].getYPosition() + 28); 
+                   		          
+	                        	  for (int counter = 29; counter < 34; counter++)
+	                        	  {
+	                        		  life[counter].setYPosition(life[counter].getYPosition() + 28); 	                        		  
+	                        	  } 
+                   		          
+	                        	  life[35].setYPosition(life[35].getYPosition() + 28); 
+	                        	  life[36].setYPosition(life[36].getYPosition() + 28); 
+	                        	  
+	                        	  for (int counter = 38; counter < 43; counter++)
+	                        	  {
+	                        		  life[counter].setYPosition(life[counter].getYPosition() + 28); 	                        		  
+	                        	  }
+	                        	  
+	                        	  life[44].setYPosition(life[44].getYPosition() + 28); 
+	                        	  life[45].setYPosition(life[45].getYPosition() + 28); 
+	                        	  life[53].setYPosition(life[53].getYPosition() + 28); 	                        	  
+	                        	  life[54].setYPosition(life[54].getYPosition() + 28); 
+	                        	  life[62].setYPosition(life[62].getYPosition() + 28); 
+	                        	 
                         	  
+	                        	  
+	                        	  
+	                        	  
 	                        	 for (int counter = 0; counter < 9; counter++)
 	                             {    
 	                     	         
@@ -1503,6 +1558,7 @@ public class BrickBreaker
 	                            
 	                             }
 	                        	 
+
 	                        	 
 	                        	 // Re-displays the arrow, resets the balls, and sets
 	                        	 // required values back to 0
@@ -1528,7 +1584,7 @@ public class BrickBreaker
 
 
 	                            set1 = 0;
-	                            set2 = set2 + 40;   // Everything has been reset the same as the first round   	                            
+	                            set2 = set2 + 24;   // Everything has been reset the same as the first round   	                            
 	                            					// except for the bricks having dropped a row
 	                             
 	                        	change = false;      // Exits current "while" loop and enters arrow "while" loop
